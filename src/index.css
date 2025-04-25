@@ -1,0 +1,970 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Root styles */
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  overflow-x: hidden !important;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
+/* Base showcase container */
+.showcase {
+  position: relative;
+  margin-top:300px;
+  left: 400px;
+  transform: scale(0.8);
+  transform-origin: top left;
+  z-index: 2;
+  min-height: 460px;
+}
+
+/* Base card styles */
+.card {
+  position: absolute;
+  background: #fff;
+  border-radius: 16px;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.3s cubic-bezier(0.83, 0, 0.17, 1);
+  overflow: hidden;
+  display: inline-block; /* Allow the card to size itself based on content */
+  @apply shadow-md border border-amber-500/10 overflow-hidden;
+}
+
+/* Make sure images fit properly */
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16px;
+  padding: 0;
+  margin: 0;
+}
+
+/* Ensure the link wrapper fills the entire card */
+.card .whole-thang-is-a-target {
+  display: block;
+  width: 100%; /* Make it fill the full width of the card */
+  height: 100%; /* Make it fill the full height of the card */
+  padding: 0; /* Remove any padding */
+  margin: 0; /* Remove any margin */
+  position: absolute; /* Ensure it aligns with the card */
+  top: 0;
+  left: 0;
+  z-index: 1; /* Ensure it stays within the card */
+}
+
+/* Ensure images and videos inside the card also fill the card */
+.card img,
+.card video {
+  width: 100%; /* Fill the full width of the card */
+  height: 100%; /* Fill the full height of the card */
+  object-fit: cover; /* Ensure the content covers the card without distortion */
+  padding: 0; /* Remove any padding */
+  margin: 0; /* Remove any margin */
+  display: block; /* Ensure proper block-level behavior */
+  border-radius: 16px; /* Match the rounded corners of the card */
+}
+
+/* Link wrapper makes the entire card clickable */
+.whole-thang-is-a-target {
+  display: block;
+  height: 100%;
+  width: 100%;
+  text-decoration: none;
+}
+
+/* Depth system - controls visual hierarchy */
+.depth-level-1 {
+  box-shadow: 0px 4px 34px 2px rgba(14, 30, 37, 0.16);
+  z-index: 3;
+}
+.depth-level-1:hover {
+  transform: translateY(-16px);
+}
+
+.depth-level-2 {
+  transform: scale(.8, .8);
+  box-shadow: 0px 4px 24px 2px rgba(14, 30, 37, 0.16);
+  z-index: 2;
+}
+.depth-level-2:hover {
+  transform: scale(.8, .8) translateY(-16px);
+}
+
+.depth-level-3 {
+  transform: scale(.7, .7);
+  box-shadow: 0px 4px 14px 2px rgba(14, 30, 37, 0.16);
+  z-index: 1;
+}
+.depth-level-3:hover {
+  transform: scale(1, 1) translateY(-16px);
+}
+
+/* Video card specific styles */
+.video-card {
+  overflow: hidden;
+}
+.video-card video {
+  position: relative;
+  border-radius: 16px; /* Add rounding to match the images */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  padding: 0;
+  margin: 0;
+  display: block;
+}
+
+/* LOGO CENTERED LAYOUT */
+/* Center logo/app icon */
+.showcase .card:nth-child(1) {
+  top: -120px;
+  left: -200px;
+  height: 256px;
+  width: 256px;
+  border-radius: 22%;
+  z-index: 99;
+  transform: scale(0.8, 0.8);
+  background-image: url(../public/images/logo.png);
+}
+.showcase .card:nth-child(1):hover {
+  transform: scale(1, 1) translateY(-16px);
+}
+
+/* Top right card */
+.showcase .card:nth-child(2) {
+  top: -280px;
+  left: -130px;
+  height: 260px;
+  width: 400px;
+  z-index: 3;
+  transform: scale(0.8, 0.8) rotate(6deg);
+  background-image: url(/path/to/image2.jpg);
+}
+.showcase .card:nth-child(2):hover {
+  transform: scale(1, 1) translateY(-16px) rotate(0deg);
+}
+
+/* Bottom right card */
+.showcase .card:nth-child(3) {
+  top: 120px;
+  left: -100px;
+  height: 260px;
+  width: 400px;
+  transform: scale(.8, .8) rotate(-8deg);
+  background-image: url(/path/to/image2.jpg);
+}
+.showcase .card:nth-child(3):hover {
+  transform: scale(1, 1) translateY(-16px) rotate(0deg);
+}
+
+/* Top left card */
+.showcase .card:nth-child(4) {
+  top: -240px;
+  left: -380px;
+  height: 260px;
+  width: 400px;
+  z-index: 1;
+  transform: scale(0.8, 0.8) rotate(4deg);
+  background-image: url(/path/to/image3.jpg);
+}
+.showcase .card:nth-child(4):hover {
+  transform: scale(1, 1) translateY(-16px) rotate(0deg);
+}
+
+/* Bottom left card */
+.showcase .card:nth-child(5) {
+  top: -40px;
+  left: -380px;
+  height: 260px;
+  width: 400px;
+  z-index: 1;
+  transform: scale(0.8, 0.8) rotate(-12deg);
+  background-image: url(/path/to/image4.jpg);
+}
+.showcase .card:nth-child(5):hover {
+  transform: scale(1, 1) translateY(-16px) rotate(0deg);
+}
+
+/* Video card (if used as one of the elements) */
+.showcase .card.video-card {
+  top: -50px;
+  right: -184px;
+  z-index: 9;
+  width: auto;
+  height: auto;
+  overflow: hidden;
+  transform: scale(1, 1) rotate(6deg);
+}
+.showcase .card.video-card:hover {
+  transform: scale(1.2,1.2) translateY(-16px) rotate(2deg);
+}
+.showcase .card.video-card video {
+  position: relative;
+  border-radius: 16px;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 975px) {
+  .showcase {
+    min-height: 200px;
+    top: -70px;
+    left: 75px;
+  }
+}
+
+@media (max-width: 768px) {
+  .showcase {
+    transform: scale(0.6);
+    margin-top: -60px;
+    padding-bottom: 2rem;
+  }
+}
+
+@layer components {
+  .showcase-card {
+    @apply absolute rounded-2xl overflow-hidden transition-transform duration-300 ease-[cubic-bezier(0.83,0,0.17,1)];
+  }
+
+  .video-wrap {
+    @apply w-[400px] rounded-2xl p-2;
+  }
+
+  .depth-1 {
+    @apply z-30 scale-[0.8] rotate-[-6deg] shadow-xl;
+  }
+
+  .depth-2 {
+    @apply z-20 scale-[0.8] rotate-[4deg] shadow-lg;
+  }
+
+  .depth-3 {
+    @apply z-10 scale-[0.7] rotate-[-2deg] shadow-md;
+  }
+}
+
+/* After your existing styles, add these specific positioning classes */
+
+/* Center logo */
+.center-logo {
+  display: flex;
+  justify-content: center; /* Horizontally center content */
+  align-items: center; /* Vertically center content */
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 160px;
+  width: 160px;
+  border-radius: 22%;
+  background-color: #242424;
+  z-index: 99;
+  overflow: hidden;
+}
+
+.center-logo:hover {
+  transform: translateX(-50%) translateY(-16px);
+}
+
+.center-logo img {
+  width: 80%; /* Adjust the size of the image */
+  height: center; /* Maintain aspect ratio */
+  object-fit: contain; /* Ensure the image fits within the box */
+  margin: auto; /* Center the image within the container */
+  display: block; /* Ensure the image behaves like a block element */
+}
+
+/* Supporting item 1 (top right) */
+.supporting-item-1 {
+  top: -40px; /* Was -80px */
+  right: 60px; /* Was 30px */
+  height: 260px;
+  width: 400px;
+  transform: scale(0.8, 0.8) rotate(6deg);
+  z-index: 3;
+}
+
+.supporting-item-1:hover {
+  transform: scale(0.8, 0.8) translateY(-16px) rotate(6deg);
+}
+
+/* Supporting item 2 (bottom right) */
+.supporting-item-2 {
+  bottom: 100px; /* Move it closer to the logo (was 60px) */
+  right: 50px; /* Move it closer horizontally (was 80px) */
+  height: 260px;
+  width: 400px;
+  transform: scale(0.7, 0.7) rotate(-8deg);
+  z-index: 2;
+}
+
+.supporting-item-2:hover {
+  transform: scale(0.7, 0.7) translateY(-16px) rotate(-8deg); /* Maintain the same hover effect */
+}
+
+/* Supporting item 3 (top left) */
+.supporting-item-3 {
+  top: -40px; /* Keep the same vertical position */
+  left: 20px; /* Move it further to the left (was 40px) */
+  height: 260px;
+  width: 400px;
+  transform: scale(0.8, 0.8) rotate(-8deg); /* Match the rotation of supporting-item-2 */
+  z-index: 3;
+}
+
+.supporting-item-3:hover {
+  transform: scale(0.8, 0.8) translateY(-16px) rotate(-8deg); /* Maintain the same hover effect */
+}
+
+/* Supporting item 4 (bottom left) */
+.supporting-item-4 {
+  bottom: 60px; /* Was 30px */
+  left: 80px; /* Was 50px */
+  height: 260px;
+  width: 400px;
+  transform: scale(0.7, 0.7) rotate(8deg);
+  z-index: 2;
+}
+
+.supporting-item-4:hover {
+  transform: scale(0.7, 0.7) translateY(-16px) rotate(8deg);
+}
+
+/* Feature video - match specified dimensions and styling */
+.feature-video {
+  position: absolute;
+  overflow: hidden;
+  transform: scale(0.8, 0.8) rotate(6deg); /* Match scaling and rotation */
+  z-index: 9;
+}
+
+.feature-video:hover {
+  transform: scale(0.8, 0.8) translateY(-16px) rotate(2deg); /* Maintain hover effect */
+}
+
+.feature-video video {
+  width: 100%; /* Fill the card width */
+  height: auto; /* Adjust height automatically */
+  object-fit: cover; /* Ensure the video covers the card without distortion */
+  border-radius: 16px; /* Match the rounded corners of other cards */
+  padding: 0;
+  margin: 0;
+}
+
+/* Flipped card - vertically oriented */
+.flipped-card {
+  top: -150px;
+  left: -20px;
+  height: 400px; /* Swap height and width compared to other cards */
+  width: 260px; /* Swap width and height compared to other cards */
+  transform: scale(0.7, 0.7) rotate(4deg); /* No flipping, just vertical orientation */
+  z-index: 9; /* Ensure it appears above other elements */
+  overflow: hidden;
+  border-radius: 16px; /* Match the rounded corners of other cards */
+  transition: transform 0.3s cubic-bezier(0.83, 0, 0.17, 1); /* Smooth transition */
+}
+
+.flipped-card:hover {
+  transform: scale(1, 1) translateY(-16px); /* Maintain hover effect */
+}
+
+.flipped-card img {
+  width: 100%; /* Fill the card width */
+  height: 100%; /* Fill the card height */
+  object-fit: cover; /* Ensure the image covers the card without distortion */
+  border-radius: 16px; /* Match the rounded corners of the card */
+  padding: 0;
+  margin: 0;
+  display: block;
+}
+.section.fp-auto-height-responsive {
+  overflow: visible !important;
+}
+.section.fp-auto-height-responsive .fp-overflow {
+  height: auto !important;
+  max-height: none !important;
+  overflow-y: auto !important;
+}
+
+/* Add this to your CSS file to ensure fullpage sections display content properly */
+.section-content {
+  padding-top: 5rem !important;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+/* Add consistent styling for all section-content elements */
+.section-content h1 {
+  margin-bottom: 2rem;
+}
+
+/* Fix for specific fullpage section content visibility */
+/* make sure fullpage’s overflow container will actually scroll */
+.fp-overflow {
+  overflow-y: auto !important;
+}
+/* Ensure first elements in sections aren't hidden */
+.fp-section .section-content:first-child {
+  padding-top: calc(6rem + 80px) !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 975px) {
+  .showcase {
+    transform: scale(0.6);
+    height: 400px;
+    margin-top: 300px;
+    left: 275px;
+  }
+  
+  .center-logo {
+    top: 20px;
+  }
+  
+  .feature-video {
+    top: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .showcase {
+    transform: scale(0.5);
+    height: 55px;
+    margin-top: 300px;
+    left: 175px;
+  }
+  
+  .supporting-item-1,
+  .supporting-item-2,
+  .supporting-item-3,
+  .supporting-item-4 {
+    width: 360px;
+    height: 240px;
+  }
+  
+  .center-logo {
+    transform: translateX(-50%) scale(0.9);
+  }
+  
+  .center-logo:hover {
+    transform: translateX(-50%) translateY(-16px) scale(0.9);
+  }
+}
+
+/* Fix horizontal and vertical scrollbars */
+
+/* 1. First, fix the showcase wrapper */
+.showcase-wrapper {
+  position: relative;
+  width: 100%;
+  height: auto !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible !important;
+  padding-bottom: 4rem;   /* matches your Tailwind pb-16 */
+}
+
+/* 2. Fix showcase positioning */
+.showcase {
+  position: relative;
+  width: 1000px;
+  height: auto !important; /* Auto height instead of negative value */
+  margin: 0 auto;
+  transform-origin: center;
+  overflow: visible; /* Allow cards to overflow showcase */
+  margin-top: 300px; /* Alternative way to shift up */
+  transform: scale(0.85); /* Slightly reduced scale to fit better */
+}
+
+/* 3. Fix the FullpageSection overflow */
+.min-h-screen.max-h-none {
+  overflow: hidden !important; /* Hide outer scrollbars */
+}
+
+/* 4. Fix the main-content-wrapper */
+/* And ensure your inner content can push past 100vh */
+.main-content-wrapper {
+  min-height: 100vh;
+  overflow: visible !important;
+  padding-bottom: 4rem;    /* enough breathing room at the bottom */
+}
+
+/* 5. Make sure the fp-overflow doesn't create scrollbars */
+/* Make sure the fullpage‐injected scroll container is visible */
+.fp-overflow {
+  overflow-y: auto !important;
+}
+
+/* 6. Fix potential body overflow */
+body {
+  overflow-x: hidden !important;
+}
+
+/* Adjust the card positions to fit better in the container */
+.supporting-item-1,
+.supporting-item-2,
+.supporting-item-3,
+.supporting-item-4 {
+  /* Keep existing properties but ensure they stay within reasonable bounds */
+  max-width: 400px;
+  max-height: 260px;
+}
+
+/* For desktop layout, keep showcase on the right */
+@media (min-width: 1024px) {
+  .showcase-wrapper {
+    justify-content: flex-end;
+    overflow: hidden !important;
+    height: 750px !important; /* Even larger on desktop */
+    padding-right: 80px; /* Provide more space on the right */
+  }
+  
+  .showcase {
+    transform: scale(0.85);
+  }
+}
+
+/* For mobile, ensure wrapper is properly constrained */
+@media (max-width: 768px) {
+  .showcase-wrapper {
+    height: 600px !important; /* Adjusted height for mobile */
+    padding: 30px; /* Smaller padding on mobile */
+  }
+  
+  .showcase {
+    transform: scale(0.5);
+    height: 555px;
+    margin-top: 300px;
+  }
+}
+
+/* Add these typography-first and amber/stone styles */
+
+/* Typography hierarchy */
+.text-foreground {
+  @apply text-stone-900;
+}
+
+.text-muted {
+  @apply text-stone-600;
+}
+
+.text-subtle {
+  @apply text-stone-400;
+}
+
+/* Custom button styles */
+.btn-amber {
+  @apply px-5 py-3 bg-amber-500 hover:bg-amber-600 text-stone-900 font-medium rounded-lg transition-colors;
+}
+
+.btn-stone {
+  @apply px-5 py-3 bg-stone-800 hover:bg-stone-700 text-amber-50 font-medium rounded-lg transition-colors;
+}
+
+/* Card styling */
+.card-amber {
+  @apply bg-amber-100 text-stone-900 shadow-md rounded-xl border border-amber-200;
+}
+
+/* Background patterns */
+.bg-pattern {
+  background-image: radial-gradient(circle at 1px 1px, rgba(0, 0, 0, 0.05) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+/* Custom card styling for the showcase */
+.card {
+  @apply shadow-md border border-amber-500/10 overflow-hidden;
+}
+
+/* Add a subtle amber glow to cards on hover */
+.card:hover {
+  box-shadow: 0 10px 25px -5px rgba(245, 158, 11, 0.2), 0 8px 10px -6px rgba(245, 158, 11, 0.1);
+}
+
+/* Advanced navbar styling */
+
+/* Glass effect for navbar */
+.backdrop-blur-md {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Enhanced state transitions */
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: theme('colors.amber.500');
+  transition: width 0.3s ease;
+}
+
+.nav-link.active::after {
+  width: 100%;
+}
+
+/* Ensure navbar is visible on all color backgrounds */
+.backdrop-saturate-150 {
+  backdrop-filter: saturate(150%) blur(12px);
+  -webkit-backdrop-filter: saturate(150%) blur(12px);
+}
+
+/* Apple-like glass effect for navbar */
+.backdrop-blur-lg {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.backdrop-saturate-150 {
+  backdrop-filter: saturate(150%) blur(20px);
+  -webkit-backdrop-filter: saturate(150%) blur(20px);
+}
+
+/* Text shadow for better readability when needed */
+.text-shadow {
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+.text-shadow-light {
+  text-shadow: 0 1px 2px rgba(255,255,255,0.2);
+}
+
+/* Add this class to active links if needed */
+.nav-active {
+  position: relative;
+}
+
+.nav-active::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  border-radius: 1.5px;
+  background-color: theme('colors.amber.400');
+  box-shadow: 0 0 8px rgba(245, 158, 11, 0.5);
+}
+
+/* Text shadow classes for navbar text */
+.text-shadow-dark {
+  text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.text-shadow-light {
+  text-shadow: 0px 1px 2px rgba(255, 255, 255, 0.5);
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 20 14.3% 4.1%;
+    --card: 0 0% 100%;
+    --card-foreground: 20 14.3% 4.1%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 20 14.3% 4.1%;
+    --primary: 24 9.8% 10%;
+    --primary-foreground: 60 9.1% 97.8%;
+    --secondary: 60 4.8% 95.9%;
+    --secondary-foreground: 24 9.8% 10%;
+    --muted: 60 4.8% 95.9%;
+    --muted-foreground: 25 5.3% 44.7%;
+    --accent: 60 4.8% 95.9%;
+    --accent-foreground: 24 9.8% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 60 9.1% 97.8%;
+    --border: 20 5.9% 90%;
+    --input: 20 5.9% 90%;
+    --ring: 20 14.3% 4.1%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+  }
+  .dark {
+    --background: 20 14.3% 4.1%;
+    --foreground: 60 9.1% 97.8%;
+    --card: 20 14.3% 4.1%;
+    --card-foreground: 60 9.1% 97.8%;
+    --popover: 20 14.3% 4.1%;
+    --popover-foreground: 60 9.1% 97.8%;
+    --primary: 60 9.1% 97.8%;
+    --primary-foreground: 24 9.8% 10%;
+    --secondary: 12 6.5% 15.1%;
+    --secondary-foreground: 60 9.1% 97.8%;
+    --muted: 12 6.5% 15.1%;
+    --muted-foreground: 24 5.4% 63.9%;
+    --accent: 12 6.5% 15.1%;
+    --accent-foreground: 60 9.1% 97.8%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 60 9.1% 97.8%;
+    --border: 12 6.5% 15.1%;
+    --input: 12 6.5% 15.1%;
+    --ring: 24 5.7% 82.9%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Add this at the end of the file */
+.styled-scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+
+.styled-scrollbar::-webkit-scrollbar-track {
+  background: rgba(28, 25, 23, 0.3);
+  border-radius: 10px;
+}
+
+.styled-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(217, 119, 6, 0.5);
+  border-radius: 10px;
+}
+
+.styled-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(217, 119, 6, 0.7);
+}
+
+/**************************************
+ * DEVHIVE SHOWCASE GRADUAL POSITIONING
+ **************************************/
+
+/* Base showcase container with dynamic positioning */
+.showcase {
+  position: relative;
+  /* fallback if JS hasn't run yet */
+  --center-x: 50%;
+  --center-y: 50%;
+  --x-offset: 0px;  /* Dynamic horizontal offset */
+  --y-offset: 100px; /* New vertical offset to lower the showcase */
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  transform-origin: center;
+  overflow: visible;
+  /* Apply both horizontal and vertical offsets */
+  transform: translate(var(--x-offset), var(--y-offset)) scale(0.85);
+  transition: transform 0.3s ease-out;
+}
+
+/* Custom breakpoint ranges for smooth positioning */
+@media (min-width: 1407px) {
+  .showcase {
+    --x-offset: 0px;  /* No offset at full width */
+    --y-offset: 100px; /* Maintain vertical offset */
+  }
+  
+  .showcase-wrapper {
+    justify-content: flex-end;
+    padding-right: 80px;
+  }
+}
+
+@media (max-width: 1406px) and (min-width: 1350px) {
+  .showcase {
+    --x-offset: -40px;
+    --y-offset: 100px; /* Maintain vertical offset */
+  }
+  
+  .showcase-wrapper {
+    justify-content: flex-end;
+    padding-right: 60px;
+  }
+}
+
+@media (max-width: 1349px) and (min-width: 1300px) {
+  .showcase {
+    --x-offset: -80px;
+    --y-offset: 100px; /* Maintain vertical offset */
+  }
+  
+  .showcase-wrapper {
+    justify-content: flex-end;
+    padding-right: 50px;
+  }
+}
+
+@media (max-width: 1299px) and (min-width: 1250px) {
+  .showcase {
+    --x-offset: -120px;
+    --y-offset: 100px; /* Maintain vertical offset */
+  }
+  
+  .showcase-wrapper {
+    justify-content: flex-end;
+    padding-right: 40px;
+  }
+}
+
+@media (max-width: 1249px) and (min-width: 1200px) {
+  .showcase {
+    --x-offset: -160px;
+    --y-offset: 100px; /* Maintain vertical offset */
+  }
+  
+  .showcase-wrapper {
+    justify-content: flex-end;
+    padding-right: 30px;
+  }
+}
+
+@media (max-width: 1199px) and (min-width: 1150px) {
+  .showcase {
+    --x-offset: -200px;
+    --y-offset: 100px; /* Maintain vertical offset */
+  }
+  
+  .showcase-wrapper {
+    justify-content: flex-end;
+    padding-right: 20px;
+  }
+}
+
+@media (max-width: 1149px) and (min-width: 1100px) {
+  .showcase {
+    --x-offset: -240px;
+    --y-offset: 100px; /* Maintain vertical offset */
+  }
+  
+  .showcase-wrapper {
+    justify-content: center;
+    padding-right: 0;
+  }
+}
+
+@media (max-width: 1099px) and (min-width: 1024px) {
+  .showcase {
+    --x-offset: -280px;
+    --y-offset: 100px; /* Maintain vertical offset */
+  }
+  
+  .showcase-wrapper {
+    justify-content: center;
+    padding-right: 0;
+  }
+}
+
+/* For desktop layout, keep showcase on the right at larger screens */
+@media (min-width: 1024px) {
+  .showcase-wrapper {
+    overflow: hidden !important;
+    height: 750px !important;
+  }
+}
+
+/* For mobile, adjust the vertical position differently */
+@media (max-width: 768px) {
+  .showcase {
+    --y-offset: 100px; /* Increased offset for mobile */
+  }
+  
+  .showcase-wrapper {
+    height: 650px !important; /* Increased height for mobile */
+    padding-bottom: 80px; /* Extra padding at the bottom */
+  }
+}
+
+/* Adjust the showcase wrapper to accommodate the lower position */
+.showcase-wrapper {
+  position: relative;
+  width: 100%;
+  height: 750px !important; /* Increased from 700px to allow more space */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden !important;
+}
+

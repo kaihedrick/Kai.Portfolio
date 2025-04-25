@@ -1,0 +1,80 @@
+#root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+/* Allow content to scroll within sections */
+.section-content {
+  padding-top: 5rem !important;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto; /* Enable vertical scrolling */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+/* Make sure sections can scroll internally when needed */
+.section {
+  width: 100vw !important;
+  height: 100vh !important;
+  overflow: hidden; /* Hide horizontal overflow */
+}
+
+.fp-scrollable {
+  overflow-y: auto !important;
+}
+
+/* Ensure fp-auto-height-responsive sections work properly */
+.fp-auto-height-responsive {
+  min-height: 100vh;
+  height: auto !important;
+}
+
+/* Remove any conflicting overflow rules */
+.fp-overflow {
+  height: auto !important;
+  overflow: visible !important;
+}
+
+.min-h-screen.max-h-none,
+.fp-overflow,
+body {
+  overflow: visible !important;
+}
