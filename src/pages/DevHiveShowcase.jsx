@@ -25,36 +25,22 @@ export default function DevHiveShowcase() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [expandedImage, setExpandedImage] = useState(null);
   const diagrams = [
-    {
-      title: "Logical Solution Diagram",
-      src: "/public/images/Logical_Solution_Design.png"
-    },
-    {
-      title: "Physical Solution Diagram",
-      src: "/public/images/Physical_Solution_Design.png"
-    },
-    {
-      title: "Component Design",
-      src: "/public/images/ReactComponentDesign.png"
-    },
-    {
-      title: "Mobile Wireframe",
-      src: "/public/images/MobileWireframe.png"
-    },
-    {
-      title: "Sitemap",
-      src: "/public/images/Sitemap.png"
-    }
+    { title: "Logical Solution Diagram", src: "/images/Logical_Solution_Design.png" },
+    { title: "Physical Solution Diagram", src: "/images/Physical_Solution_Design.png" },
+    { title: "Component Design", src: "/images/ReactComponentDesign.png" },
+    { title: "Mobile Wireframe", src: "/images/MobileWireframe.png" },
+    { title: "Sitemap", src: "/images/Sitemap.png" }
   ];
+  
   const showcaseSlides = [
-    // New videos added to the showcase
-    { title: "Create Sprint & Task", src: "/public/videos/CreateSprint_CreateTask.mp4", type: "video" },
-    { title: "DevHive Board", src: "/public/videos/DevHiveBoard.mp4", type: "video" },
-    { title: "React Second Demo", src: "/public/videos/DevHiveReactSecondDemo.mp4", type: "video" },
-    { title: "Join & Leave Project", src: "/public/videos/JoinLeaveProject.mp4", type: "video" },
-    { title: "Messaging, Invites, and Account Settings", src: "/public/videos/FlutterDemoLong.mp4", type: "video" },
-    { title: "Project Backlog", src: "/public/videos/ProjectBacklog.mp4", type: "video" }
+    { title: "Create Sprint & Task", src: "/videos/CreateSprint_CreateTask.mp4", type: "video" },
+    { title: "DevHive Board", src: "/videos/DevHiveBoard.mp4", type: "video" },
+    { title: "React Second Demo", src: "/videos/DevHiveReactSecondDemo.mp4", type: "video" },
+    { title: "Join & Leave Project", src: "/videos/JoinLeaveProject.mp4", type: "video" },
+    { title: "Messaging, Invites, and Account Settings", src: "/videos/FlutterDemoLong.mp4", type: "video" },
+    { title: "Project Backlog", src: "/videos/ProjectBacklog.mp4", type: "video" }
   ];
+  
   
   return (
     <>
