@@ -145,12 +145,12 @@ export default function FrostedNavbar({ isHome = false, onNavClick }) {
   return (
     <nav
       className={cn(
-        "fixed top-6 left-1/2 transform -translate-x-1/2 z-50 transition-all duration-500 w-[95%] md:w-auto",
+        "fixed top-6 left-1/2 transform -translate-x-1/2 z-50 transition-all duration-500 w-auto max-w-[95%]",
         isVisible ? "opacity-100" : "opacity-0 -translate-y-10"
       )}
     >
       <div className={cn(
-        "backdrop-blur-md backdrop-saturate-150 border border-white/30 shadow-lg rounded-full px-3 md:px-6 py-2 md:py-3 flex items-center space-x-2 md:space-x-6 overflow-x-auto styled-scrollbar",
+        "backdrop-blur-md backdrop-saturate-150 border border-white/30 shadow-lg rounded-full px-3 md:px-6 py-2 md:py-3 flex items-center justify-center space-x-2 md:space-x-6 overflow-x-auto styled-scrollbar",
         // Replace existing opacity values with consistent 50% transparency
         navBgClass.replace(/\/[0-9]+/, "/50")  // Replace any existing opacity with /50
       )}>
@@ -160,7 +160,7 @@ export default function FrostedNavbar({ isHome = false, onNavClick }) {
             href={item.path}
             onClick={(e) => handleNavClick(e, item)}
             className={cn(
-              "text-base font-medium tracking-wide transition-colors relative flex items-center gap-2",
+              "text-base whitespace-nowrap font-medium tracking-wide transition-colors relative flex items-center gap-2",
               textBaseClass === "text-white" ? "text-shadow-dark" : "",
               getIsActive(item)
                 ? "text-amber-400 font-semibold"
