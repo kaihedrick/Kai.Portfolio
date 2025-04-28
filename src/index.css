@@ -949,7 +949,7 @@ body {
 @media (max-width: 768px) {
   .showcase {
     --y-offset: 50px; /* Increased offset for mobile */
-    --x-offset: -70px; /* Centered horizontally */
+    --x-offset: -75px; /* Centered horizontally */
   }
   
   .showcase-wrapper {
