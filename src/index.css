@@ -948,7 +948,8 @@ body {
 /* For mobile, adjust the vertical position differently */
 @media (max-width: 768px) {
   .showcase {
-    --y-offset: 100px; /* Increased offset for mobile */
+    --y-offset: 50px; /* Increased offset for mobile */
+    --x-offset: -70px; /* Centered horizontally */
   }
   
   .showcase-wrapper {
