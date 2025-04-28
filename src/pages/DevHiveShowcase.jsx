@@ -98,8 +98,15 @@ export default function DevHiveShowcase() {
         scrollOverflow={true}
         responsiveWidth={800}
         responsiveHeight={600}
-        fitToSection={false}
+        responsiveSlides={true}
+        bigSectionsDestination={'top'}
+        paddingTop={'0px'}
+        paddingBottom={'0px'}
+        normalScrollElements={'.scrollable-content'}
         afterRender={api => setFullpageApi(api)}
+        afterResponsive={(isResponsive) => {
+          console.log(`Is responsive: ${isResponsive}`);
+        }}
         render={({ fullpageApi }) => (
           <div id="fullpage">
             {/* 1. Introduction */}
@@ -656,7 +663,8 @@ export default function DevHiveShowcase() {
                                 className="rounded max-h-[280px] max-w-full md:w-auto w-full"
                                 controls
                                 preload="metadata" // Only load the metadata first for better mobile performance
-                                playsInline // Better for iOS
+                                playsInline // Important for iOS
+                                muted // Start muted (users can unmute)
                               >
                                 <source src={item.src} type="video/mp4" />
                                 Your browser does not support the video tag.

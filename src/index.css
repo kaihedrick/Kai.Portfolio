@@ -968,3 +968,63 @@ body {
   overflow: hidden !important;
 }
 
+/* DevHive section specific styling */
+.section[data-anchor="devhive"] .main-content-wrapper {
+  padding-top: 5rem !important;
+  margin-top: 2rem;
+}
+
+/* Make sure the text content has proper spacing on mobile */
+@media (max-width: 800px) {
+  .section[data-anchor="devhive"] .main-content-wrapper {
+    padding-top: 7rem !important; /* Even more padding on mobile */
+  }
+  
+  .section[data-anchor="devhive"] .text-content {
+    margin-bottom: 2rem;
+  }
+}
+
+/* DevHive showcase specific adjustments */
+.section[data-anchor="devhive"] .showcase {
+  transform: translate(var(--x-offset), var(--y-offset)) scale(0.75); /* Reduced from 0.85 to 0.75 */
+}
+
+/* Make it even smaller on tablet */
+@media (max-width: 1024px) {
+  .section[data-anchor="devhive"] .showcase {
+    transform: translate(var(--x-offset), var(--y-offset)) scale(0.65);
+  }
+}
+
+/* Make it properly sized on mobile */
+@media (max-width: 768px) {
+  .section[data-anchor="devhive"] .showcase {
+    transform: translate(var(--x-offset), var(--y-offset)) scale(0.5);
+  }
+  
+  .section[data-anchor="devhive"] .showcase-wrapper {
+    height: 600px !important; /* Slightly shorter on mobile */
+  }
+}
+
+/* Fix responsive mode scrolling in the DevHive section */
+html.fp-responsive .section[data-anchor="devhive"] {
+  min-height: auto !important;
+  padding-bottom: 2rem;
+}
+
+/* Ensure content fills viewport on mobile */
+@media (max-width: 800px) {
+  .section[data-anchor="devhive"] {
+    min-height: 100vh !important;
+  }
+  
+  .section[data-anchor="devhive"] .main-content-wrapper {
+    min-height: calc(100vh - 2rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+}
+

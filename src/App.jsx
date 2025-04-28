@@ -18,19 +18,35 @@ function Home() {
       licenseKey={'YOUR_KEY_HERE'} // Remove this line if using the free version
       anchors={anchors}
       navigation={true}
-      scrollBar={false}
       navigationTooltips={['Home', 'About', 'Projects', 'DevHive', 'Contact']}
       scrollingSpeed={700}
-      scrollOverflowReset={true}
-      responsiveWidth={800}
-      responsiveHeight={600}
-      fitToSection={false}
       scrollOverflow={true}
+      scrollOverflowReset={true}
+      
+      // Mobile responsiveness settings
+      responsiveWidth={800}      // Switch to normal scrolling below this width
+      responsiveHeight={600}     // Switch to normal scrolling below this height
+      responsiveSlides={true}    // Make slides responsive
+      bigSectionsDestination={'top'} // Control how fullpage behaves when visiting big sections
+      
+      // These settings help with mobile display
+      paddingTop={'0px'}
+      paddingBottom={'0px'}
+      fixedElements={'.nav-fixed'}
+      normalScrollElements={'.scrollable-content'}
+      
+      // This helps with smooth transitions
+      easing={'easeInOutCubic'}
+      
       onLeave={(origin, destination) => {
         console.log(`Moving from ${origin.index} to ${destination.index}`);
       }}
       afterRender={api => {
         setFullpageApi(api);
+      }}
+      afterResponsive={(isResponsive) => {
+        console.log(`Is responsive: ${isResponsive}`);
+        // You could update state here if needed
       }}
       render={({ state, fullpageApi }) => (
         <>
@@ -45,8 +61,8 @@ function Home() {
 
           <div id="fullpage">
             {/* Section 1: Home */}
-            <div className="section bg-stone-900 text-stone-50 flex items-center justify-center" data-anchor="home">
-              <div className="section-content flex flex-col items-center justify-center text-center">
+            <div className="section bg-stone-900 text-stone-50" data-anchor="home">
+              <div className="section-content min-h-screen flex flex-col items-center justify-center text-center px-4 py-16 md:py-0">
                 <div className="bg-amber-500/10 p-2 px-4 rounded-full mb-4">
                   <span className="text-amber-400 text-sm font-medium">Software Developer</span>
                 </div>
@@ -56,7 +72,7 @@ function Home() {
                 <p className="text-xl text-stone-200 max-w-2xl mb-8">
                   Full-stack developer specializing in creating modern, responsive, and user-friendly applications.
                 </p>
-                <div className="flex gap-4">
+                <div className="flex flex-wrap gap-4 items-center justify-center">
                   <button 
                     onClick={() => fullpageApi.moveTo(anchors.indexOf('projects') + 1)} 
                     className="px-6 py-3 bg-amber-500 hover:bg-amber-600 text-stone-900 font-medium rounded-lg transition-colors"
@@ -187,7 +203,7 @@ function Home() {
 
             {/* Section 4: DevHive */}
             <div className="section fp-auto-height-responsive bg-stone-300" data-anchor="devhive">
-            <div className="main-content-wrapper flex flex-col lg:flex-row items-center justify-between w-full px-6 lg:px-24 pb-16">
+              <div className="main-content-wrapper flex flex-col lg:flex-row items-center justify-between w-full px-6 lg:px-24 pb-16">
                 <div className="text-content relative z-10 w-full lg:w-2/5 text-center lg:text-left flex flex-col justify-center">
                   <div className="bg-amber-500/10 p-2 px-4 rounded-full mb-4 inline-block">
                     <span className="text-amber-600 text-sm font-medium">Featured Project</span>
@@ -196,7 +212,7 @@ function Home() {
                   <p className="text-xl mb-8 text-stone-700">
                     DevHive is a collaborative platform designed to connect developers and enable seamless project management. It provides tools for team collaboration and code sharing - all within a user-friendly interface that promotes developer productivity.
                   </p>
-                  <div className="flex flex-row gap-4 mt-12 lg:justify-start justify-center">
+                  <div className="flex flex-row gap-4 mt-8 lg:justify-start justify-center">
                     <a 
                       href="https://github.com/kaihedrick/DevHive.ReactFrontend" 
                       target="_blank" 
@@ -206,7 +222,7 @@ function Home() {
                       View Code
                     </a>
                     <button 
-                      onClick={() => navigate('/devhive-showcase')} // Use navigate to redirect
+                      onClick={() => navigate('/devhive-showcase')} 
                       className="px-4 py-2 bg-amber-500 hover:bg-amber-600 rounded-lg transition-colors text-stone-900"
                     >
                       Learn More
@@ -214,7 +230,7 @@ function Home() {
                   </div>
                 </div>
                 
-                {/* Removed hard-coded height and added bottom padding class */}
+                {/* Update the showcase wrapper */}
                 <div className="showcase-wrapper w-full lg:w-3/5 relative">
                   <CentralShowcase />
                 </div>

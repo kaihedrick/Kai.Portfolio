@@ -120,6 +120,46 @@ body {
     width: 12px;
     margin: 5px;
   }
+
+  /* Keep section-content fullscreen even in responsive mode */
+  .section .section-content {
+    min-height: 100vh !important;
+    padding-top: 5rem !important;
+    padding-bottom: 2rem !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  /* Better padding on mobile */
+  .section {
+    padding: 0 !important;
+  }
+
+  /* Ensure content area fills screen */
+  .section-content {
+    width: 100% !important;
+    min-height: 100vh !important;
+    overflow-y: visible !important;
+  }
+
+  /* Ensure no double scrollbars */
+  html.fp-responsive .fp-section {
+    height: auto !important;
+  }
+
+  /* Fix fp-responsive to still look fullscreen-like */
+  html.fp-responsive .section {
+    min-height: 100vh !important;
+  }
+
+  /* Adjust navbar for mobile */
+  .nav-fixed {
+    position: fixed !important;
+    top: 0 !important;
+    z-index: 100 !important;
+    width: 100% !important;
+  }
 }
 
 /* Fix for mobile when fullpage becomes responsive */
@@ -131,4 +171,24 @@ html.fp-responsive .section {
 .fp-responsive .section .section-content {
   position: relative;
   display: block;
+}
+
+/* Key fix for maintaining fullscreen look in responsive mode */
+html.fp-responsive .fp-section,
+html.fp-responsive .fp-slide,
+html.fp-responsive .fp-section.fp-table, 
+html.fp-responsive .fp-slide.fp-table {
+  min-height: 100vh !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+/* Ensure content is visible and centered */
+html.fp-responsive .section .section-content {
+  width: 100%;
+  max-width: 100%;
+  padding: 1rem;
+  margin: 0 auto;
 }
