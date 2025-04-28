@@ -78,3 +78,57 @@
 body {
   overflow: visible !important;
 }
+
+/* Mobile-specific fullpage adjustments */
+@media (max-width: 800px) {
+  /* When in responsive mode (normal scroll) */
+  .fp-section {
+    padding: 1rem 0 !important;
+    min-height: auto !important;
+    height: auto !important;
+  }
+  
+  /* Section content padding on mobile */
+  .section-content {
+    padding: 1rem !important;
+    padding-top: 5rem !important;
+  }
+  
+  /* Fix showcase carousel on mobile */
+  .showcase .card {
+    transform: scale(0.7);
+  }
+  
+  /* Stack grid elements on mobile */
+  .grid.md\\:grid-cols-2, .grid.md\\:grid-cols-3 {
+    grid-template-columns: 1fr !important;
+  }
+  
+  /* Ensure tables can scroll horizontally on small screens */
+  .styled-scrollbar {
+    overflow-x: auto;
+  }
+  
+  /* Make carousel containers shorter on mobile */
+  .relative.w-full.h-\\[400px\\] {
+    height: 350px !important;
+  }
+  
+  /* Make the mobile navigation more compact */
+  #fp-nav ul li {
+    height: 12px;
+    width: 12px;
+    margin: 5px;
+  }
+}
+
+/* Fix for mobile when fullpage becomes responsive */
+html.fp-responsive .section {
+  height: auto !important;
+}
+
+/* Make sure content is visible in both fullpage and responsive mode */
+.fp-responsive .section .section-content {
+  position: relative;
+  display: block;
+}

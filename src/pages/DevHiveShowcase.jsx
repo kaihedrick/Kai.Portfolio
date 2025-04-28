@@ -96,6 +96,9 @@ export default function DevHiveShowcase() {
         ]}
         scrollingSpeed={700}
         scrollOverflow={true}
+        responsiveWidth={800}
+        responsiveHeight={600}
+        fitToSection={false}
         afterRender={api => setFullpageApi(api)}
         render={({ fullpageApi }) => (
           <div id="fullpage">
@@ -649,7 +652,12 @@ export default function DevHiveShowcase() {
                           <h3 className="text-amber-300 text-lg font-medium mb-2">{item.title}</h3>
                           <div className="relative group">
                             {item.type === "video" ? (
-                              <video controls className="rounded max-h-[280px] max-w-full">
+                              <video 
+                                className="rounded max-h-[280px] max-w-full md:w-auto w-full"
+                                controls
+                                preload="metadata" // Only load the metadata first for better mobile performance
+                                playsInline // Better for iOS
+                              >
                                 <source src={item.src} type="video/mp4" />
                                 Your browser does not support the video tag.
                               </video>

@@ -22,6 +22,10 @@ function Home() {
       navigationTooltips={['Home', 'About', 'Projects', 'DevHive', 'Contact']}
       scrollingSpeed={700}
       scrollOverflowReset={true}
+      responsiveWidth={800}
+      responsiveHeight={600}
+      fitToSection={false}
+      scrollOverflow={true}
       onLeave={(origin, destination) => {
         console.log(`Moving from ${origin.index} to ${destination.index}`);
       }}
