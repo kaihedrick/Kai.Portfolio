@@ -1029,3 +1029,53 @@ html.fp-responsive .section[data-anchor="devhive"] {
   }
 }
 
+/* Make the DevHive section stand out more */
+.section[data-anchor="devhive"] {
+  position: relative;
+}
+
+.section[data-anchor="devhive"]::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, rgba(245, 158, 11, 0), rgba(245, 158, 11, 0.8), rgba(245, 158, 11, 0));
+  z-index: 10;
+}
+
+/* Make the Learn More button more attractive */
+.section[data-anchor="devhive"] button {
+  position: relative;
+  overflow: hidden;
+}
+
+.section[data-anchor="devhive"] button::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(60deg, rgba(245, 158, 11, 0), rgba(255, 255, 255, 0.3), rgba(245, 158, 11, 0));
+  transform: rotate(45deg);
+  opacity: 0;
+  transition: opacity 0.4s;
+  pointer-events: none;
+}
+
+.section[data-anchor="devhive"] button:hover::after {
+  opacity: 1;
+  animation: sheen 1s forwards;
+}
+
+@keyframes sheen {
+  0% {
+    transform: translateX(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) rotate(45deg);
+  }
+}
+

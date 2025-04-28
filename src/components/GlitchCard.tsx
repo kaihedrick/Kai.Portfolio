@@ -9,6 +9,9 @@ interface GlitchCardProps {
   fullDescription: string;
   color: number[][];
   children: ReactNode;
+  isFeature?: boolean; // New prop to identify the featured card
+  variant?: string;    // Keep for compatibility
+  onViewProject?: () => void; // Add this new prop
 }
 
 export const GlitchCard = ({ 
@@ -16,17 +19,25 @@ export const GlitchCard = ({
   description, 
   fullDescription, 
   color, 
-  children 
+  children,
+  isFeature = false,
+  variant = "amber",
+  onViewProject // Add this prop here
 }: GlitchCardProps) => {
   const [hovered, setHovered] = useState(false);
   const [expanded, setExpanded] = useState(false);
+  
+  // Always use amber colors for hover effect, but vary intensity based on if it's featured
+  const hoverColors = isFeature 
+    ? [[245, 158, 11], [251, 191, 36], [217, 119, 6]] // Brighter amber for featured
+    : [[245, 158, 11], [217, 119, 6]]; // Standard amber for others
 
   return (
     <div
       onClick={() => setExpanded(!expanded)}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className={`relative group/canvas-card max-w-sm w-full ${expanded ? 'h-auto min-h-96' : 'h-80'} p-4 mx-auto flex items-center justify-center border border-stone-600/30 rounded-xl overflow-hidden cursor-pointer transition-all duration-300 shadow-lg`}
+      className={`relative group/canvas-card max-w-sm w-full ${expanded ? 'h-auto min-h-96' : 'h-80'} p-4 mx-auto flex items-center justify-center border ${isFeature ? 'border-amber-500/50' : 'border-stone-600/30'} rounded-xl overflow-hidden cursor-pointer transition-all duration-300 ${isFeature ? 'shadow-lg shadow-amber-500/20' : 'shadow-md'}`}
     >
       {/* Conditionally render the glitch effect */}
       {(expanded || hovered) && (
@@ -38,10 +49,10 @@ export const GlitchCard = ({
           className="absolute inset-0 h-full w-full"
         >
           <CanvasRevealEffect
-            animationSpeed={expanded ? 3 : 1.5}
-            colors={color}
-            dotSize={2}
-            containerClassName="bg-stone-900" // Changed from stone-950 to stone-900 to match theme
+            animationSpeed={expanded ? 3 : isFeature ? 2.5 : 1.5}
+            colors={hovered ? hoverColors : color}
+            dotSize={isFeature ? 2.5 : 2}
+            containerClassName={isFeature ? "bg-stone-800" : "bg-stone-900"}
           />
         </motion.div>
       )}
@@ -60,10 +71,9 @@ export const GlitchCard = ({
           </motion.div>
         )}
         
-        {/* Added better text readability with amber/stone scheme */}
         <motion.div className={`${expanded ? 'bg-stone-900/90 p-6 rounded-xl border border-amber-600/20' : ''}`}>
           <motion.h2 
-            className={`text-amber-100 text-2xl font-bold ${expanded ? 'mt-1 mb-4 text-left' : 'mt-4 px-3 py-1 bg-stone-800/80 inline-block rounded-lg border-l-2 border-amber-500'} transition-all duration-300`}
+            className={`text-amber-100 text-2xl font-bold ${expanded ? 'mt-1 mb-4 text-left' : `mt-4 px-3 py-1 ${isFeature ? 'bg-amber-500/20' : 'bg-stone-800/80'} inline-block rounded-lg border-l-2 border-amber-500`} transition-all duration-300`}
             layout
           >
             {title}
@@ -71,7 +81,7 @@ export const GlitchCard = ({
           
           {!expanded && (
             <motion.p 
-              className="text-sm text-stone-200 mt-3 line-clamp-2 transition duration-200 bg-stone-800/80 p-3 rounded-lg mx-auto max-w-[90%]"
+              className={`text-sm ${isFeature ? 'text-amber-100' : 'text-stone-200'} mt-3 line-clamp-2 transition duration-200 ${isFeature ? 'bg-stone-900/80' : 'bg-stone-800/80'} p-3 rounded-lg mx-auto max-w-[90%]`}
               layout
             >
               {description}...
@@ -88,7 +98,13 @@ export const GlitchCard = ({
                 {fullDescription}
               </p>
               <div className="mt-6 text-center">
-                <button className="px-5 py-2 bg-amber-500 hover:bg-amber-600 text-stone-900 rounded-lg transition-colors text-sm font-medium shadow-md hover:shadow-amber-500/20">
+                <button 
+                  className="px-5 py-2 bg-amber-500 hover:bg-amber-600 text-stone-900 rounded-lg transition-colors text-sm font-medium shadow-md hover:shadow-amber-500/20"
+                  onClick={(e) => {
+                    e.stopPropagation(); // Prevent triggering parent onClick
+                    if (onViewProject) onViewProject();
+                  }}
+                >
                   View Project
                 </button>
               </div>

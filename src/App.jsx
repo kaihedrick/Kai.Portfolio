@@ -146,7 +146,7 @@ function Home() {
                   {/* Featured Project: DevHive */}
                   <div className="relative col-span-1 md:col-span-1">
                     <div className="absolute -top-10 left-1/2 transform -translate-x-1/2">
-                      <div className="inline-block py-1 px-4 bg-amber-500/20 rounded-full border border-amber-500/40">
+                      <div className="inline-block py-1 px-4 bg-amber-500/30 rounded-full border border-amber-500/50">
                         <span className="text-amber-400 font-medium text-sm">⭐ Featured Project</span>
                       </div>
                     </div>
@@ -159,7 +159,9 @@ function Home() {
                         [251, 191, 36], // amber-400
                         [217, 119, 6]   // amber-600
                       ]}
+                      isFeature={true}  // Add this prop to mark as featured
                       variant="amber"
+                      onViewProject={() => navigate('/devhive-showcase')} // Add this new prop
                     >
                       <div className="w-20 h-20 bg-amber-500 rounded-full mx-auto flex items-center justify-center">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-stone-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -169,13 +171,13 @@ function Home() {
                     </GlitchCard>
                   </div>
 
-                  {/* Other Projects */}
+                  {/* Update the Bermuda Stock Portfolio card */}
                   <GlitchCard
                     title="Bermuda Stock Portfolio"
                     description="Lead Developer for a full-stack web application enabling portfolio management and stock tracking"
                     fullDescription="Lead Developer for a full-stack web application enabling portfolio management and stock tracking. Built a .NET Core and MySQL backend with N-Layer architecture and MVC design, ensuring scalability and modularity. Developed and tested RESTful APIs with Postman, employing DAO for secure data abstraction. Delivered secure authentication, optimized performance, and ensured version control with GitHub. Agile methodologies were used to deliver a high quality product to meet client needs."
-                    color={[[87, 83, 78]]} // stone-600
-                    variant="stone"
+                    color={[[87, 83, 78]]} // Default color (stone-600)
+                    variant="amber" // This will be used for the hover effect
                   >
                     <div className="w-20 h-20 bg-stone-600 rounded-full mx-auto flex items-center justify-center">
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-stone-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -184,12 +186,13 @@ function Home() {
                     </div>
                   </GlitchCard>
 
+                  {/* Update the CarMaxxing card */}
                   <GlitchCard
                     title="CarMaxxing"
                     description="Lead Project Developer for a Spring Boot-based microservices car listings app, contributing over 2,000 lines of code"
                     fullDescription="Lead Project Developer for a Spring Boot-based microservices car listings app, contributing over 2,000 lines of code. Designed MongoDB databases to enhance CRUD operations and scalability. Developed secure RESTful APIs, rigorously tested via Postman, and implemented Spring Security for authentication and secure endpoints. Applied all four OOP principles—encapsulation, abstraction, inheritance, and polymorphism—to ensure clean, modular, and maintainable code. Created formal design specs with ER diagrams and showcased results via a GitHub repository."
-                    color={[[68, 64, 60]]} // stone-700
-                    variant="stone"
+                    color={[[68, 64, 60]]} // Default color (stone-700)
+                    variant="amber" // This will be used for the hover effect
                   >
                     <div className="w-20 h-20 bg-stone-700 rounded-full mx-auto flex items-center justify-center">
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-stone-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -223,7 +226,7 @@ function Home() {
                     </a>
                     <button 
                       onClick={() => navigate('/devhive-showcase')} 
-                      className="px-4 py-2 bg-amber-500 hover:bg-amber-600 rounded-lg transition-colors text-stone-900"
+                      className="px-4 py-2 bg-amber-500 hover:bg-amber-600 rounded-lg transition-colors text-stone-900 shadow-md hover:shadow-amber-500/20 font-medium"
                     >
                       Learn More
                     </button>
