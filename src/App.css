@@ -43,7 +43,7 @@
 
 /* Allow content to scroll within sections */
 .section-content {
-  padding-top: 5rem !important;
+  padding-top: 80px; /* Match your navbar height */
   width: 100%;
   height: 100%;
   overflow-y: auto; /* Enable vertical scrolling */
@@ -91,7 +91,7 @@ body {
   /* Section content padding on mobile */
   .section-content {
     padding: 1rem !important;
-    padding-top: 5rem !important;
+    padding-top: 80px !important;
   }
   
   /* Fix showcase carousel on mobile */
@@ -124,7 +124,7 @@ body {
   /* Keep section-content fullscreen even in responsive mode */
   .section .section-content {
     min-height: 100vh !important;
-    padding-top: 5rem !important;
+    padding-top: 80px !important;
     padding-bottom: 2rem !important;
     display: flex;
     flex-direction: column;
@@ -191,4 +191,18 @@ html.fp-responsive .section .section-content {
   max-width: 100%;
   padding: 1rem;
   margin: 0 auto;
+}
+
+/* Ensure the navbar is fixed and takes priority */
+.nav-fixed {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999 !important; /* Higher than any other z-index */
+}
+
+/* Make sure the first section has proper padding */
+.section:first-child .section-content {
+  padding-top: 0; /* The fullPage paddingTop handles this already */
 }

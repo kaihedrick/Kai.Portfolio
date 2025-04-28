@@ -25,15 +25,51 @@ export default function FrostedNavbar({ isHome = false, onNavClick }) {
   useEffect(() => {
     if (!isHome) return;
     
+    // Check if there's an initial section to navigate to from state
+    if (location.state?.scrollToSection !== undefined && onNavClick) {
+      onNavClick(location.state.scrollToSection);
+      setActiveIndex(location.state.scrollToSection);
+      // Clear the state to prevent repeated scrolling
+      navigate(location.pathname, { replace: true, state: {} });
+    }
+    
     const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      setIsVisible(currentScrollY < lastScrollY || currentScrollY < 10);
-      setLastScrollY(currentScrollY);
+      // First check if we're in fullpage mode
+      const isFullPageActive = document.querySelector('.fp-enabled');
       
-      // Find which section is in view
+      // Only hide navbar on scroll in non-fullpage mode
+      if (!isFullPageActive) {
+        const currentScrollY = window.scrollY;
+        setIsVisible(currentScrollY < lastScrollY || currentScrollY < 10);
+        setLastScrollY(currentScrollY);
+      } else {
+        // In fullpage mode, always keep navbar visible
+        setIsVisible(true);
+      }
+      
+      // Rest of your section detection code remains unchanged
+      // Find which section is in view...
       const sections = document.querySelectorAll('.fp-section');
       if (!sections.length) return;
       
+      // Use fullpage.js's active section if available
+      const activeSection = document.querySelector('.fp-section.active');
+      if (activeSection) {
+        const index = Array.from(sections).indexOf(activeSection);
+        if (index !== -1) {
+          setActiveIndex(index);
+          
+          // Extract background color from section classes
+          const classes = activeSection.className.split(' ');
+          const bgClass = classes.find(cls => cls.startsWith('bg-'));
+          if (bgClass) {
+            setCurrentSectionBgColor(bgClass.replace('bg-', ''));
+          }
+        }
+        return;
+      }
+      
+      // Fallback to calculating based on scroll position
       const windowHeight = window.innerHeight;
       let currentSectionIndex = 0;
       
@@ -54,9 +90,12 @@ export default function FrostedNavbar({ isHome = false, onNavClick }) {
       setActiveIndex(currentSectionIndex);
     };
     
+    // Initial call to set the right section on load
+    handleScroll();
+    
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY, isHome]);
+  }, [lastScrollY, isHome, location, navigate, onNavClick]);
   
   // Handle click navigation - support both section and page navigation
   const handleNavClick = (e, item) => {
@@ -67,6 +106,7 @@ export default function FrostedNavbar({ isHome = false, onNavClick }) {
         onNavClick(item.sectionId);
         setActiveIndex(item.sectionId);
       } else {
+        // When navigating from a non-home page to a specific section
         navigate('/', { state: { scrollToSection: item.sectionId } });
       }
     } else {

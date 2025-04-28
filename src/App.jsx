@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import ReactFullpage from '@fullpage/react-fullpage';
 import { GlitchCard } from './components/GlitchCard';
 import CentralShowcase from './components/VideoShowcase';
@@ -12,10 +12,47 @@ const anchors = ['home', 'about', 'projects', 'devhive', 'contact'];
 function Home() {
   const [fullpageApi, setFullpageApi] = useState(null);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Effect to handle navigation when returning from other pages
+  useEffect(() => {
+    if (location.state?.scrollToSection !== undefined && fullpageApi) {
+      // Add a small delay to ensure fullpageApi is initialized
+      setTimeout(() => {
+        if (fullpageApi && typeof fullpageApi.moveTo === 'function') {
+          fullpageApi.moveTo(location.state.scrollToSection + 1);
+          // Clear the state to prevent repeated scrolling
+          navigate(location.pathname, { replace: true, state: {} });
+        }
+      }, 300); // Increased delay to ensure API is ready
+    }
+  }, [fullpageApi, location.state, navigate]);
+
+  const handleNavClick = (sectionId) => {
+    if (fullpageApi && typeof fullpageApi.moveTo === 'function') {
+      fullpageApi.moveTo(sectionId + 1);
+    } else {
+      console.warn("fullpageApi is not initialized properly");
+      // Fallback to regular anchor navigation
+      const anchor = anchors[sectionId];
+      if (anchor) {
+        window.location.hash = anchor;
+      }
+    }
+  };
 
   return (
     <ReactFullpage
-      licenseKey={'YOUR_KEY_HERE'} // Remove this line if using the free version
+      // Either remove the licenseKey property completely (for open source usage)
+      // licenseKey={'YOUR_KEY_HERE'} 
+      // Or provide a valid license key if you have purchased one
+      
+      credits={{
+        enabled: true,
+        label: 'Made with fullPage.js',
+        position: 'right'
+      }}
+      
       anchors={anchors}
       navigation={true}
       navigationTooltips={['Home', 'About', 'Projects', 'DevHive', 'Contact']}
@@ -30,9 +67,9 @@ function Home() {
       bigSectionsDestination={'top'} // Control how fullpage behaves when visiting big sections
       
       // These settings help with mobile display
-      paddingTop={'0px'}
+      paddingTop={'80px'}
       paddingBottom={'0px'}
-      fixedElements={'.nav-fixed'}
+      fixedElements={'.fixed, .nav-fixed'}
       normalScrollElements={'.scrollable-content'}
       
       // This helps with smooth transitions
@@ -41,8 +78,9 @@ function Home() {
       onLeave={(origin, destination) => {
         console.log(`Moving from ${origin.index} to ${destination.index}`);
       }}
-      afterRender={api => {
-        setFullpageApi(api);
+      afterRender={({ fullpageApi }) => {
+        console.log("FullPage API initialized:", fullpageApi);
+        setFullpageApi(fullpageApi);
       }}
       afterResponsive={(isResponsive) => {
         console.log(`Is responsive: ${isResponsive}`);
@@ -52,11 +90,8 @@ function Home() {
         <>
           <FrostedNavbar 
             isHome={true} 
-            onNavClick={(sectionId) => {
-              if (fullpageApi) {
-                fullpageApi.moveTo(sectionId + 1);
-              }
-            }} 
+            onNavClick={handleNavClick}
+            className="fixed nav-fixed"
           />
 
           <div id="fullpage">
