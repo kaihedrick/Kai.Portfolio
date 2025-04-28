@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { cn } from '../utils/cn';
+import { cn } from "../utils/cn";
 import { Home } from "lucide-react";
 
-const NAV_ITEMS = [
+// Define navigation items
+const HOME_NAV_ITEMS = [
   { name: "Home", sectionId: 0, path: "#home", isSection: true },
   { name: "About", sectionId: 1, path: "#about", isSection: true },
   { name: "Projects", sectionId: 2, path: "#projects", isSection: true },
@@ -13,148 +14,167 @@ const NAV_ITEMS = [
   { name: "Contact", sectionId: 4, path: "#contact", isSection: true },
 ];
 
-export default function FrostedNavbar({ isHome = false, onNavClick }) {
+const DEVHIVE_NAV_ITEMS = [
+  { name: "Home", sectionId: null, path: "/", isSection: false },
+];
+
+export default function FrostedNavbar({ isHome = false, onNavClick, activeIndex: externalActiveIndex, className }) {
   const navigate = useNavigate();
   const location = useLocation();
   const [isVisible, setIsVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [internalActiveIndex, setInternalActiveIndex] = useState(0);
+  const lastScrollYRef = useRef(0);
   const [currentSectionBgColor, setCurrentSectionBgColor] = useState("stone-900");
+
+  const navItems = isHome ? HOME_NAV_ITEMS : DEVHIVE_NAV_ITEMS;
   
-  // Detect active section and background color - only when on home page
+  // Use the external activeIndex if provided, or fall back to internal state
+  // This way the parent component can control the active state
+  const activeIndex = externalActiveIndex !== undefined ? externalActiveIndex : internalActiveIndex;
+
+  const isFullPageActive = () => document.querySelector('.fp-enabled') !== null;
+
   useEffect(() => {
     if (!isHome) return;
-    
-    // Check if there's an initial section to navigate to from state
+
     if (location.state?.scrollToSection !== undefined && onNavClick) {
       onNavClick(location.state.scrollToSection);
-      setActiveIndex(location.state.scrollToSection);
-      // Clear the state to prevent repeated scrolling
+      setInternalActiveIndex(location.state.scrollToSection);
       navigate(location.pathname, { replace: true, state: {} });
     }
-    
+
     const handleScroll = () => {
-      // First check if we're in fullpage mode
-      const isFullPageActive = document.querySelector('.fp-enabled');
-      
-      // Only hide navbar on scroll in non-fullpage mode
-      if (!isFullPageActive) {
+      const fullPageActive = isFullPageActive();
+
+      if (!fullPageActive) {
         const currentScrollY = window.scrollY;
-        setIsVisible(currentScrollY < lastScrollY || currentScrollY < 10);
-        setLastScrollY(currentScrollY);
+        setIsVisible(currentScrollY < lastScrollYRef.current || currentScrollY < 10);
+        lastScrollYRef.current = currentScrollY;
       } else {
-        // In fullpage mode, always keep navbar visible
         setIsVisible(true);
       }
-      
-      // Rest of your section detection code remains unchanged
-      // Find which section is in view...
-      const sections = document.querySelectorAll('.fp-section');
-      if (!sections.length) return;
-      
-      // Use fullpage.js's active section if available
-      const activeSection = document.querySelector('.fp-section.active');
-      if (activeSection) {
-        const index = Array.from(sections).indexOf(activeSection);
-        if (index !== -1) {
-          setActiveIndex(index);
-          
-          // Extract background color from section classes
-          const classes = activeSection.className.split(' ');
-          const bgClass = classes.find(cls => cls.startsWith('bg-'));
-          if (bgClass) {
-            setCurrentSectionBgColor(bgClass.replace('bg-', ''));
+
+      // Only update internal active index when an external one isn't provided
+      if (externalActiveIndex === undefined) {
+        const sections = document.querySelectorAll('.fp-section, .section');
+        if (!sections.length) return;
+
+        if (fullPageActive) {
+          const activeSection = document.querySelector('.fp-section.active');
+          if (activeSection) {
+            const index = Array.from(sections).indexOf(activeSection);
+            if (index !== -1) {
+              setInternalActiveIndex(index);
+
+              const classes = activeSection.className.split(' ');
+              const bgClass = classes.find(cls => cls.startsWith('bg-'));
+              if (bgClass) {
+                setCurrentSectionBgColor(bgClass.replace('bg-', ''));
+              }
+            }
+            return;
           }
         }
-        return;
+
+        const windowHeight = window.innerHeight;
+        let detectedIndex = 0;
+
+        sections.forEach((section, index) => {
+          const rect = section.getBoundingClientRect();
+          if (rect.top <= windowHeight / 2 && rect.bottom >= windowHeight / 2) {
+            detectedIndex = index;
+
+            const classes = section.className.split(' ');
+            const bgClass = classes.find(cls => cls.startsWith('bg-'));
+            if (bgClass) {
+              setCurrentSectionBgColor(bgClass.replace('bg-', ''));
+            }
+          }
+        });
+
+        setInternalActiveIndex(detectedIndex);
       }
-      
-      // Fallback to calculating based on scroll position
-      const windowHeight = window.innerHeight;
-      let currentSectionIndex = 0;
-      
-      sections.forEach((section, index) => {
-        const rect = section.getBoundingClientRect();
-        if (rect.top <= windowHeight/2 && rect.bottom >= windowHeight/2) {
-          currentSectionIndex = index;
-          
-          // Extract background color from section classes
-          const classes = section.className.split(' ');
-          const bgClass = classes.find(cls => cls.startsWith('bg-'));
-          if (bgClass) {
-            setCurrentSectionBgColor(bgClass.replace('bg-', ''));
-          }
-        }
-      });
-      
-      setActiveIndex(currentSectionIndex);
     };
-    
-    // Initial call to set the right section on load
+
     handleScroll();
-    
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY, isHome, location, navigate, onNavClick]);
-  
-  // Handle click navigation - support both section and page navigation
+
+    const observer = new MutationObserver((mutations) => {
+      for (const mutation of mutations) {
+        if (mutation.attributeName === 'class' && (
+          mutation.target.classList.contains('fp-enabled') || 
+          mutation.target.classList.contains('fp-responsive'))) {
+          handleScroll();
+          break;
+        }
+      }
+    });
+
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      observer.disconnect();
+    };
+  }, [isHome, location.pathname, location.state, navigate, onNavClick, externalActiveIndex]);
+
+  // Update section background color when activeIndex changes
+  useEffect(() => {
+    if (isHome && externalActiveIndex !== undefined) {
+      const sections = document.querySelectorAll('.fp-section, .section');
+      if (externalActiveIndex >= 0 && externalActiveIndex < sections.length) {
+        const section = sections[externalActiveIndex];
+        const classes = section.className.split(' ');
+        const bgClass = classes.find(cls => cls.startsWith('bg-'));
+        if (bgClass) {
+          setCurrentSectionBgColor(bgClass.replace('bg-', ''));
+        }
+      }
+    }
+  }, [externalActiveIndex, isHome]);
+
   const handleNavClick = (e, item) => {
     e.preventDefault();
-    
     if (item.isSection) {
-      if (isHome && onNavClick) {
+      if (onNavClick) {
         onNavClick(item.sectionId);
-        setActiveIndex(item.sectionId);
-      } else {
-        // When navigating from a non-home page to a specific section
-        navigate('/', { state: { scrollToSection: item.sectionId } });
       }
     } else {
-      navigate(item.path);
+      navigate(item.path, { state: { scrollToSection: 0 } });
     }
   };
-  
-  // Use existing getNavbarStyle logic
+
   const getNavbarStyle = () => {
     let textBaseClass = "text-white";
     let textHoverClass = "hover:text-amber-400";
-  
+
     if (['stone-100', 'stone-200', 'stone-300', 'amber-100', 'stone-800'].some(c => currentSectionBgColor.includes(c))) {
-      textBaseClass = "text-white"; // force white to show up on dark bg like stone-800
+      textBaseClass = "text-white";
       textHoverClass = "hover:text-amber-300";
     }
-  
-    return {
-      navBgClass: "bg-white/30 dark:bg-stone-900/50", // universal frosted glass
-      textBaseClass,
-      textHoverClass
-    };
+
+    return { navBgClass: "bg-white/30 dark:bg-stone-900/50", textBaseClass, textHoverClass };
   };
-  
-  
+
   const { navBgClass, textBaseClass, textHoverClass } = getNavbarStyle();
-  
-  // Determine active item based on location
+
   const getIsActive = (item) => {
     if (isHome && item.isSection) {
       return activeIndex === item.sectionId;
     }
     return location.pathname === item.path;
   };
-  
+
   return (
-    <nav
-      className={cn(
-        "fixed top-6 left-1/2 transform -translate-x-1/2 z-50 transition-all duration-500 w-auto max-w-[95%]",
-        isVisible ? "opacity-100" : "opacity-0 -translate-y-10"
-      )}
-    >
+    <nav className={cn(
+      "fixed top-6 left-1/2 transform -translate-x-1/2 z-50 transition-all duration-500 w-auto max-w-[95%]",
+      isVisible ? "opacity-100" : "opacity-0 -translate-y-10",
+    )}>
       <div className={cn(
-        "backdrop-blur-md backdrop-saturate-150 border border-white/30 shadow-lg rounded-full px-3 md:px-6 py-2 md:py-3 flex items-center justify-center space-x-2 md:space-x-6 overflow-x-auto styled-scrollbar",
-        // Replace existing opacity values with consistent 50% transparency
-        navBgClass.replace(/\/[0-9]+/, "/50")  // Replace any existing opacity with /50
+        "backdrop-blur-md backdrop-saturate-150 border border-white/30 shadow-lg rounded-full px-4 md:px-6 py-2 md:py-3 flex items-center justify-center space-x-2 md:space-x-6 overflow-x-auto styled-scrollbar",
+        navBgClass.replace(/\/[0-9]+/, "/50")
       )}>
-        {NAV_ITEMS.map((item) => (
+        {navItems.map((item) => (
           <a
             key={item.path}
             href={item.path}

@@ -9,5 +9,28 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <script type="module">
+      export function setupRouteObserver() {
+        // Run on initial page load
+        checkRouteAndUpdateClass();
+
+        // Listen for route changes
+        window.addEventListener('popstate', checkRouteAndUpdateClass);
+
+        // Check route function
+        function checkRouteAndUpdateClass() {
+          const path = window.location.pathname;
+          if (path === '/devhive-showcase') {
+            document.body.classList.add('on-devhive-showcase');
+          } else {
+            document.body.classList.remove('on-devhive-showcase');
+          }
+        }
+
+        return () => {
+          window.removeEventListener('popstate', checkRouteAndUpdateClass);
+        };
+      }
+    </script>
   </body>
 </html>

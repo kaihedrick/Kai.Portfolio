@@ -15,6 +15,7 @@
     "clsx": "^2.1.1",
     "framer-motion": "^12.7.4",
     "fullpage.js": "^4.0.35",
+    "locomotive-scroll": "^4.1.4",
     "lucide-react": "^0.503.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
