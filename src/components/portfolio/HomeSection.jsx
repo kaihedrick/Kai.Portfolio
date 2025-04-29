@@ -1,8 +1,20 @@
 import React from "react";
 
-const anchors = ['home', 'about', 'projects', 'devhive', 'contact']; // define it here
+const anchors = ['home', 'about', 'projects', 'devhive', 'contact'];
 
 export default function HomeSection({ fullpageApi }) {
+  // Safe navigation function that works even if fullpageApi is undefined
+  const navigateToSection = (sectionIndex) => {
+    if (fullpageApi && typeof fullpageApi.moveTo === 'function') {
+      fullpageApi.moveTo(sectionIndex);
+    } else if (window.globalFullpageApi && typeof window.globalFullpageApi.moveTo === 'function') {
+      window.globalFullpageApi.moveTo(sectionIndex);
+    } else {
+      // Fallback to anchor links
+      window.location.hash = anchors[sectionIndex - 1];
+    }
+  };
+
   return (
     <div className="section bg-stone-900 text-stone-50" data-anchor="home">
       <div className="section-content min-h-screen flex flex-col items-center justify-center text-center px-4 py-16 md:py-0">
@@ -25,13 +37,13 @@ export default function HomeSection({ fullpageApi }) {
         {/* Buttons */}
         <div className="flex flex-wrap gap-4 items-center justify-center">
           <button
-            onClick={() => fullpageApi.moveTo(anchors.indexOf('projects') + 1)}
+            onClick={() => navigateToSection(anchors.indexOf('projects') + 1)}
             className="px-6 py-3 bg-amber-500 hover:bg-amber-600 text-stone-900 font-medium rounded-lg transition-colors"
           >
             View Projects
           </button>
           <button
-            onClick={() => fullpageApi.moveTo(anchors.indexOf('contact') + 1)}
+            onClick={() => navigateToSection(anchors.indexOf('contact') + 1)}
             className="px-6 py-3 bg-stone-700 hover:bg-stone-600 text-stone-100 font-medium rounded-lg transition-colors border border-stone-600"
           >
             Contact Me
