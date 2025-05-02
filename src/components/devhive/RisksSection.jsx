@@ -3,7 +3,7 @@ import React from 'react';
 export default function RisksSection() {
   return (
     <div className="section bg-stone-700 text-stone-100 flex items-center justify-center" data-anchor="risks">
-      <div className="section-content max-w-6xl mx-auto px-4">
+      <div className="section-content max-w-5xl mx-auto px-4 devhive-section-padding">
 
         {/* Tagline */}
         <div className="bg-amber-500/10 p-2 px-4 rounded-full mb-4 inline-block">

@@ -26,10 +26,17 @@ export default function DevHiveShowcase() {
   const [fullpageApi, setFullpageApi] = useState(null);
   const [expandedImage, setExpandedImage] = useState(null);
 
+  // Create handleNavClick function similar to App.jsx
+  const handleNavClick = (sectionId) => {
+    if (fullpageApi) {
+      fullpageApi.moveTo(sectionId + 1);
+    }
+  };
+
   return (
     <>
-      {/* Frosted Navbar */}
-      <FrostedNavbar isHome={false} onNavClick={idx => fullpageApi && fullpageApi.moveTo(idx + 1)} />
+      {/* Frosted Navbar with updated onNavClick */}
+      <FrostedNavbar isHome={false} onNavClick={handleNavClick} />
 
       {/* Global Fullscreen Modal */}
       {expandedImage && (
@@ -89,18 +96,20 @@ export default function DevHiveShowcase() {
         paddingTop={'0px'}
         paddingBottom={'0px'}
         normalScrollElements={'.scrollable-content'}
-        afterRender={({ fullpageApi }) => setFullpageApi(fullpageApi)}
-        render={() => (
+        afterRender={({ fullpageApi }) => {
+          console.log("fullpageApi initialized in DevHiveShowcase");
+          setFullpageApi(fullpageApi);
+        }}
+        render={({ state, fullpageApi }) => (
           <div id="fullpage">
-            <IntroductionSection />
+            {/* Pass both fullpageApi and handleNavClick to IntroductionSection */}
+            <IntroductionSection fullpageApi={fullpageApi} handleNavClick={handleNavClick} />
             <RequirementsSection />
             <TechnologiesSection />
             <NewTechSection />
-            {/* KEY: Pass setExpandedImage into ApproachSection */}
             <ApproachSection setExpandedImage={setExpandedImage} />
             <RisksSection />
             <LimitationsSection />
-            {/* KEY: Pass setExpandedImage into ShowcaseSection */}
             <ShowcaseSection setExpandedImage={setExpandedImage} />
           </div>
         )}

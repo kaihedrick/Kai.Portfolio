@@ -3,7 +3,7 @@ import React from 'react';
 export default function LimitationsSection() {
   return (
     <div className="section bg-stone-800 text-stone-100 flex items-center justify-center" data-anchor="limitations">
-      <div className="section-content max-w-5xl mx-auto px-4">
+      <div className="section-content max-w-5xl mx-auto px-4 devhive-section-padding">
 
         {/* Tagline */}
         <div className="bg-amber-500/10 p-2 px-4 rounded-full mb-4 inline-block">

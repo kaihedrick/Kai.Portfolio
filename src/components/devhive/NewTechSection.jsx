@@ -6,7 +6,7 @@ export default function NewTechSection() {
       className="section bg-stone-900 text-stone-50 flex items-center justify-center"
       data-anchor="new-tech"
     >
-      <div className="section-content max-w-3xl mx-auto px-4 flex flex-col items-center justify-center h-full">
+      <div className="section-content max-w-5xl mx-auto px-4 devhive-section-padding flex flex-col items-center justify-center h-full">
         <div className="w-full">
           <div className="bg-amber-500/10 p-2 px-4 rounded-full mb-4 inline-block">
             <span className="text-amber-400 text-sm font-medium">

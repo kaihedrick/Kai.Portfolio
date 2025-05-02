@@ -3,7 +3,7 @@ import React from "react";
 export default function RequirementsSection() {
   return (
     <div className="section bg-stone-800 text-stone-100 flex items-center justify-center" data-anchor="requirements">
-      <div className="section-content max-w-5xl mx-auto px-4 flex flex-col items-center justify-center h-full">
+      <div className="section-content max-w-5xl mx-auto px-4 devhive-section-padding flex flex-col items-center justify-center h-full">
         <div className="w-full">
           {/* Tagline */}
           <div className="bg-amber-500/10 p-2 px-4 rounded-full mb-4 inline-block">

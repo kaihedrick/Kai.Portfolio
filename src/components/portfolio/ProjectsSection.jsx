@@ -32,7 +32,7 @@ export default function ProjectsSection({ navigate }) {
               color={[[245, 158, 11], [251, 191, 36], [217, 119, 6]]}
               isFeature={true}
               variant="amber"
-              onViewProject={() => navigate("/devhive-showcase")}
+              onViewProject={() => navigate("/devhive-showcase#intro")}
             >
               <div className="w-20 h-20 bg-amber-500 rounded-full mx-auto flex items-center justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-stone-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">

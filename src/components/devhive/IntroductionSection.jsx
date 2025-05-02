@@ -1,12 +1,42 @@
 // src/components/devhive/IntroductionSection.jsx
-import React from 'react';
-
+import React, { useEffect, useState } from 'react';
 
 export default function IntroductionSection({ fullpageApi }) {
+  const [isAnimating, setIsAnimating] = useState(false);
+  
+  // Update useEffect to use rem units
+  useEffect(() => {
+    const section = document.querySelector('.section[data-anchor="intro"]');
+    if (section) {
+      const content = section.querySelector('.section-content');
+      if (content) {
+        content.style.paddingTop = '2rem'; // Less padding at top
+        content.style.paddingBottom = '6rem'; // 6rem padding at bottom
+      }
+    }
+  }, []);
+  
+  // Simplify the navigation - use the anchor name directly to match the pattern in DevHiveShowcase
+  const handleShowcaseClick = () => {
+    if (fullpageApi) {
+      // This matches how the navbar works in DevHiveShowcase
+      // The anchors array is zero-indexed in the onNavClick function
+      // Showcase is at index 7 in the anchors array (it's the 8th item)
+      const showcaseIndex = 7; // "showcase" is the 8th anchor (index 7)
+      fullpageApi.moveTo(showcaseIndex + 1); // +1 because fullpage sections are 1-indexed
+    }
+  };
+  
+  const handleMouseEnter = () => {
+    setIsAnimating(true);
+    // Reset animation after it completes
+    setTimeout(() => setIsAnimating(false), 1500);
+  };
+  
   return (
     <div className="section bg-stone-900 text-stone-50 flex items-center justify-center" data-anchor="intro">
-      <div className="section-content max-w-5xl mx-auto text-center px-6 py-24">
-
+      <div className="section-content max-w-5xl mx-auto text-center px-6 py-8 pb-24 devhive-section-padding">
+        {/* Content remains the same */}
         <div className="bg-amber-500/10 px-4 py-1.5 rounded-full mb-6 inline-block shadow-sm shadow-amber-400/10">
           <span className="text-amber-300 text-sm font-semibold tracking-wide">Project Introduction</span>
         </div>
@@ -39,11 +69,17 @@ export default function IntroductionSection({ fullpageApi }) {
         </p>
 
         <div className="flex justify-center">
-          <button
-            onClick={() => fullpageApi && fullpageApi.moveTo(8)}
-            className="px-8 py-3 rounded-lg bg-amber-500 hover:bg-amber-600 text-stone-900 font-semibold transition-all shadow-md hover:shadow-lg"
+          <button 
+            onClick={handleShowcaseClick}
+            onMouseEnter={handleMouseEnter}
+            className="px-8 py-3 bg-amber-500 hover:bg-amber-600 rounded-lg transition-colors text-stone-900 shadow-md hover:shadow-amber-500/20 font-medium relative overflow-hidden"
           >
-            View Showcase
+            <span className="relative z-10">View Showcase</span>
+            <span 
+              className={`absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full ${
+                isAnimating ? 'animate-shine' : ''
+              }`}
+            />
           </button>
         </div>
       </div>

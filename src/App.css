@@ -435,3 +435,65 @@ html.fp-responsive .section .section-content {
     overflow: hidden !important;
   }
 }
+
+/* DevHive section padding helper classes */
+.devhive-section-padding {
+  padding-top: 2rem !important;
+  padding-bottom: 6rem !important; /* Larger bottom padding */
+}
+
+/* Apply the helper class to all DevHive sections */
+.section[data-anchor="intro"] .section-content,
+.section[data-anchor="requirements"] .section-content,
+.section[data-anchor="technologies"] .section-content,
+.section[data-anchor="new-tech"] .section-content,
+.section[data-anchor="approach"] .section-content,
+.section[data-anchor="risks"] .section-content,
+.section[data-anchor="limitations"] .section-content,
+.section[data-anchor="showcase"] .section-content {
+  padding-top: 2rem !important;
+  padding-bottom: 6rem !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1023px) {
+  .section[data-anchor="intro"] .section-content,
+  .section[data-anchor="requirements"] .section-content,
+  .section[data-anchor="technologies"] .section-content,
+  .section[data-anchor="new-tech"] .section-content,
+  .section[data-anchor="approach"] .section-content,
+  .section[data-anchor="risks"] .section-content,
+  .section[data-anchor="limitations"] .section-content,
+  .section[data-anchor="showcase"] .section-content {
+    padding-top: 3rem !important; /* More top padding on smaller screens */
+    padding-bottom: 6rem !important;
+  }
+}
+
+@media (max-width: 800px) {
+  .section[data-anchor="intro"] .section-content,
+  .section[data-anchor="requirements"] .section-content,
+  .section[data-anchor="technologies"] .section-content,
+  .section[data-anchor="new-tech"] .section-content,
+  .section[data-anchor="approach"] .section-content,
+  .section[data-anchor="risks"] .section-content,
+  .section[data-anchor="limitations"] .section-content,
+  .section[data-anchor="showcase"] .section-content {
+    padding-top: 4rem !important; /* Even more top padding on mobile */
+    padding-bottom: 6rem !important;
+  }
+}
+
+/* Add this to your existing CSS */
+@keyframes shine {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(200%);
+  }
+}
+
+.animate-shine {
+  animation: shine 1.5s forwards;
+}

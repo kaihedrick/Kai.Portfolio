@@ -26,7 +26,7 @@ export default function DevHiveTeaser({ navigate }) {
               View Code
             </a>
             <button 
-              onClick={() => navigate("/devhive-showcase")}
+              onClick={() => navigate("/devhive-showcase#intro")}
               className="px-4 py-2 bg-amber-500 hover:bg-amber-600 rounded-lg transition-colors text-stone-900 shadow-md hover:shadow-amber-500/20 font-medium"
             >
               Learn More
