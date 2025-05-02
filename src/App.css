@@ -358,3 +358,80 @@ html.fp-responsive .section .section-content {
 #fullpage .section[data-anchor="showcase"] .fp-overflow {
   overflow: hidden !important;
 }
+
+/* Add these simple rules at the end of your file */
+
+/* Fix for Approach and Showcase sections */
+.section[data-anchor="approach"] .fp-overflow,
+.section[data-anchor="showcase"] .fp-overflow {
+  height: auto !important;
+  min-height: 100vh !important;
+}
+
+/* Additional padding for top and bottom */
+@media (min-width: 1024px) {
+  .section[data-anchor="approach"] .section-content,
+  .section[data-anchor="showcase"] .section-content {
+    padding-top: 30px !important;
+    padding-bottom: 60px !important;
+  }
+}
+
+@media (max-width: 1023px) {
+  .section[data-anchor="approach"] .section-content,
+  .section[data-anchor="showcase"] .section-content {
+    padding-top: 60px !important; /* More padding on mobile due to navigation */
+    padding-bottom: 80px !important;
+  }
+}
+
+/* Fix for Approach and Showcase sections - works for all screen sizes */
+.section[data-anchor="approach"] .fp-overflow,
+.section[data-anchor="showcase"] .fp-overflow {
+  height: auto !important;
+  min-height: 100vh !important;
+}
+
+/* Additional padding for larger desktop screens */
+@media (min-width: 1024px) {
+  .section[data-anchor="approach"] .section-content,
+  .section[data-anchor="showcase"] .section-content {
+    padding-top: 30px !important;
+    padding-bottom: 60px !important;
+  }
+}
+
+/* Medium sized screens between 1023px and 800px */
+@media (max-width: 1023px) and (min-width: 801px) {
+  .section[data-anchor="approach"] .section-content,
+  .section[data-anchor="showcase"] .section-content {
+    padding-top: 50px !important; /* Slightly less top padding than smaller screens */
+    padding-bottom: 100px !important; /* More bottom padding to ensure content visibility */
+  }
+  
+  /* Ensure carousel containers fit properly on these screen sizes */
+  .section[data-anchor="approach"] .diagram-carousel,
+  .section[data-anchor="showcase"] .relative.w-full.h-\[400px\] {
+    height: 360px !important;
+    max-height: 360px !important;
+  }
+}
+
+/* Smaller screens 800px and below */
+@media (max-width: 800px) {
+  .section[data-anchor="approach"] .section-content,
+  .section[data-anchor="showcase"] .section-content {
+    padding-top: 60px !important; /* More padding on mobile due to navigation */
+    padding-bottom: 120px !important; /* Extra bottom padding for smallest screens */
+  }
+}
+
+/* Ensure the fp-overflow fix is applied across all screen sizes */
+@media (max-width: 1200px) {
+  #fullpage .section[data-anchor="approach"] .fp-overflow,
+  #fullpage .section[data-anchor="showcase"] .fp-overflow {
+    height: auto !important;
+    min-height: 100vh !important;
+    overflow: hidden !important;
+  }
+}
