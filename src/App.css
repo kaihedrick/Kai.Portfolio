@@ -160,6 +160,105 @@ body {
     z-index: 100 !important;
     width: 100% !important;
   }
+
+  .section[data-anchor="approach"],
+  .section[data-anchor="showcase"] {
+    min-height: 100vh !important;
+    height: auto !important;
+    overflow: hidden !important;
+  }
+
+  .section[data-anchor="approach"] .fp-overflow,
+  .section[data-anchor="showcase"] .fp-overflow {
+    overflow: hidden !important;
+    height: auto !important;
+  }
+
+  .section[data-anchor="showcase"] .relative.w-full.h-\[400px\] {
+    height: 350px !important;
+    max-height: 350px !important;
+  }
+  
+  .section[data-anchor="approach"] .diagram-carousel {
+    max-height: 350px !important;
+  }
+}
+
+/* Medium screen optimizations (1200px - 1024px) */
+@media (max-width: 1200px) and (min-width: 1025px) {
+  /* Adjust section padding for better spacing */
+  .section .section-content {
+    padding-top: 100px !important;
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+  }
+  
+  /* Make carousel containers more compact */
+  .section[data-anchor="approach"] .diagram-carousel,
+  .section[data-anchor="showcase"] .relative.w-full.h-\[400px\] {
+    height: 380px !important;
+    max-height: 380px !important;
+  }
+  
+  /* Scale down content slightly */
+  .section[data-anchor="approach"] img,
+  .section[data-anchor="showcase"] video {
+    max-height: 260px !important;
+  }
+}
+
+/* Small desktop optimizations (1024px - 769px) */
+@media (max-width: 1024px) and (min-width: 769px) {
+  /* Further adjust section padding */
+  .section .section-content {
+    padding-top: 90px !important;
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+  
+  /* Make carousel containers even more compact */
+  .section[data-anchor="approach"] .diagram-carousel,
+  .section[data-anchor="showcase"] .relative.w-full.h-\[400px\] {
+    height: 360px !important;
+    max-height: 360px !important;
+  }
+  
+  /* Scale down content more aggressively */
+  .section[data-anchor="approach"] img,
+  .section[data-anchor="showcase"] video {
+    max-height: 240px !important;
+  }
+  
+  /* Adjust carousel item positioning */
+  .section[data-anchor="approach"] .diagram-carousel div[class*="absolute"],
+  .section[data-anchor="showcase"] .relative.w-full.h-\[400px\] div[class*="absolute"] {
+    transform: scale(0.95) !important;
+  }
+}
+
+/* Ensure carousel content always fits */
+.section[data-anchor="approach"] .diagram-carousel,
+.section[data-anchor="showcase"] .relative.w-full.h-\[400px\] {
+  overflow: visible !important;
+  height: auto !important;
+  min-height: 350px !important;
+}
+
+/* Fix the nested content inside carousels */
+.section[data-anchor="approach"] .diagram-carousel > div,
+.section[data-anchor="showcase"] .relative.w-full.h-\[400px\] > div {
+  height: 100% !important;
+}
+
+/* Override overflow settings to prevent unwanted scrollbars */
+.section[data-anchor="approach"],
+.section[data-anchor="showcase"] {
+  overflow: hidden !important;
+}
+
+.section[data-anchor="approach"] .fp-overflow,
+.section[data-anchor="showcase"] .fp-overflow {
+  overflow: hidden !important;
 }
 
 /* Fix for mobile when fullpage becomes responsive */
@@ -205,4 +304,57 @@ html.fp-responsive .section .section-content {
 /* Make sure the first section has proper padding */
 .section:first-child .section-content {
   padding-top: 0; /* The fullPage paddingTop handles this already */
+}
+
+/* Fix for the Approach section with diagrams */
+.section[data-anchor="approach"],
+.section[data-anchor="approach"] .fp-overflow,
+.section[data-anchor="approach"] .section-content {
+  overflow: hidden !important;
+  height: auto !important;
+  min-height: 100vh !important;
+}
+
+/* Fix for the Showcase section */
+.section[data-anchor="showcase"],
+.section[data-anchor="showcase"] .fp-overflow,
+.section[data-anchor="showcase"] .section-content {
+  overflow: hidden !important;
+  height: auto !important;
+  min-height: 100vh !important;
+}
+
+/* Override any conflicting rules specifically for these sections */
+.section[data-anchor="approach"] .fp-overflow,
+.section[data-anchor="showcase"] .fp-overflow {
+  overflow: hidden !important;
+  height: auto !important;
+  min-height: 100vh !important;
+}
+
+/* Fix carousel height to prevent overflow */
+.section[data-anchor="showcase"] .relative.w-full.h-\[400px\] {
+  height: 400px !important;
+  max-height: 400px !important;
+  overflow: visible !important;
+}
+
+.section[data-anchor="approach"] .diagram-carousel {
+  overflow: visible !important;
+  max-height: 450px !important;
+}
+
+/* Ensure containers are properly sized */
+.section[data-anchor="approach"] .section-content,
+.section[data-anchor="showcase"] .section-content {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  overflow: hidden !important;
+}
+
+/* Targeted fix for fullpage.js specific elements */
+#fullpage .section[data-anchor="approach"] .fp-overflow,
+#fullpage .section[data-anchor="showcase"] .fp-overflow {
+  overflow: hidden !important;
 }

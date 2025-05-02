@@ -12,7 +12,7 @@ export default function DiagramCarousel({ setExpandedImage }) {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <div className="relative w-full h-[400px] mb-8">
+    <div className="relative w-full h-[360px] mb-4"> {/* Reduced height and bottom margin */}
       {/* Left Arrow */}
       <button 
         className="absolute left-0 top-1/2 -translate-y-1/2 z-50 bg-stone-900/80 hover:bg-stone-900 text-amber-400 p-2 rounded-r-lg border-l-2 border-amber-500 transition-all" 
@@ -27,11 +27,11 @@ export default function DiagramCarousel({ setExpandedImage }) {
       </button>
 
       {/* Diagram Display Area */}
-      <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
+      <div className="relative w-full h-full flex items-center justify-center overflow-visible">
         {diagrams.map((diagram, index) => (
           <div 
             key={index}
-            className={`absolute transition-all duration-500 ease-in-out bg-stone-900/80 border border-amber-400 rounded-lg p-4 flex flex-col items-center ${
+            className={`absolute transition-all duration-500 ease-in-out bg-stone-900/80 border border-amber-400 rounded-lg p-3 flex flex-col items-center ${
               index === activeIndex 
                 ? "z-30 scale-100 opacity-100" 
                 : index === (activeIndex - 1 + diagrams.length) % diagrams.length 
@@ -41,12 +41,12 @@ export default function DiagramCarousel({ setExpandedImage }) {
                     : "z-10 opacity-0 scale-50"
             }`}
           >
-            <h3 className="text-amber-300 text-lg font-medium mb-2">{diagram.title}</h3>
+            <h3 className="text-amber-300 text-lg font-medium mb-1">{diagram.title}</h3> {/* Reduced margin */}
             <div className="relative group">
               <img 
                 src={diagram.src} 
                 alt={diagram.title} 
-                className="w-full max-h-[280px] object-contain rounded cursor-pointer transition-transform group-hover:scale-[1.02]" 
+                className="w-full max-h-[260px] object-contain rounded cursor-pointer transition-transform group-hover:scale-[1.02]" 
                 onClick={() => setExpandedImage(diagram)}
               />
               <div 

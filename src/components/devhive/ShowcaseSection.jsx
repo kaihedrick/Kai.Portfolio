@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const showcaseSlides = [
   { title: "Create Sprint & Task", src: "/videos/CreateSprint_CreateTask.mp4", type: "video" },
@@ -11,19 +11,31 @@ const showcaseSlides = [
 
 export default function ShowcaseSection({ setExpandedImage }) {
   const [activeIndex, setActiveIndex] = useState(0);
+  
+  // Add a simple useEffect to adjust padding
+  useEffect(() => {
+    const section = document.querySelector('.section[data-anchor="showcase"]');
+    if (section) {
+      const content = section.querySelector('.section-content');
+      if (content) {
+        content.style.paddingTop = '30px'; // Less padding at top
+        content.style.paddingBottom = '60px'; // More padding at bottom
+      }
+    }
+  }, []);
 
   return (
     <div className="section bg-stone-800 text-stone-100 flex items-center justify-center overflow-hidden" data-anchor="showcase">
-      <div className="section-content max-w-5xl mx-auto px-4 overflow-hidden">
-        {/* Header */}
+      <div className="section-content max-w-5xl mx-auto px-4 py-8 overflow-hidden">
+        {/* Header - unchanged */}
         <div className="bg-amber-500/10 p-2 px-4 rounded-full mb-4 inline-block">
           <span className="text-amber-400 text-sm font-medium">Project Showcase</span>
         </div>
         <h2 className="text-4xl font-semibold mb-6 text-amber-400">UI Showcase & Demo</h2>
 
-        {/* Showcase Carousel with fixed height */}
+        {/* Showcase Carousel - unchanged */}
         <div className="relative w-full h-[400px] mb-8 overflow-visible">
-          {/* Left Arrow */}
+          {/* Left Arrow - unchanged */}
           <button
             className="absolute left-0 top-1/2 -translate-y-1/2 z-50 bg-stone-900/80 hover:bg-stone-900 text-amber-400 p-2 rounded-r-lg border-l-2 border-amber-500 transition-all"
             onClick={() => setActiveIndex(activeIndex === 0 ? showcaseSlides.length - 1 : activeIndex - 1)}
@@ -33,7 +45,7 @@ export default function ShowcaseSection({ setExpandedImage }) {
             </svg>
           </button>
 
-          {/* Content container with controlled overflow */}
+          {/* Content container - unchanged */}
           <div className="relative w-full h-full flex items-center justify-center overflow-visible">
             {showcaseSlides.map((item, index) => (
               <div
@@ -54,9 +66,9 @@ export default function ShowcaseSection({ setExpandedImage }) {
                     <video 
                       className="rounded max-h-[280px] max-w-full md:w-auto w-full"
                       controls
-                      preload="metadata" // Only load the metadata first for better mobile performance
-                      playsInline // Important for iOS
-                      muted // Start muted (users can unmute)
+                      preload="metadata"
+                      playsInline
+                      muted
                     >
                       <source src={item.src} type="video/mp4" />
                       Your browser does not support the video tag.
@@ -84,7 +96,7 @@ export default function ShowcaseSection({ setExpandedImage }) {
             ))}
           </div>
 
-          {/* Right Arrow */}
+          {/* Right Arrow - unchanged */}
           <button 
             className="absolute right-0 top-1/2 -translate-y-1/2 z-50 bg-stone-900/80 hover:bg-stone-900 text-amber-400 p-2 rounded-l-lg border-r-2 border-amber-500 transition-all" 
             onClick={() => setActiveIndex((activeIndex + 1) % showcaseSlides.length)}
@@ -95,7 +107,7 @@ export default function ShowcaseSection({ setExpandedImage }) {
           </button>
         </div>
 
-        {/* QR Code Cards - Shortened for smaller screens */}
+        {/* QR Code Cards - unchanged */}
         <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 place-items-center">
           {/* Kai Card */}
           <div className="bg-stone-900/60 backdrop-blur-md border border-amber-500/20 rounded-xl p-4 w-32 md:w-40 flex flex-col items-center shadow-inner shadow-black/10 transition-transform hover:scale-105">

@@ -1,14 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import DiagramCarousel from "./DiagramCarousel";
 
 export default function ApproachSection({ setExpandedImage }) {
+  // Add a simple useEffect to adjust padding
+  useEffect(() => {
+    const section = document.querySelector('.section[data-anchor="approach"]');
+    if (section) {
+      const content = section.querySelector('.section-content');
+      if (content) {
+        content.style.paddingTop = '30px'; // Less padding at top
+        content.style.paddingBottom = '60px'; // More padding at bottom
+      }
+    }
+  }, []);
+
   return (
     <div
       className="section bg-stone-800 text-stone-100 flex items-center justify-center"
       data-anchor="approach"
     >
-      <div className="section-content max-w-4xl mx-auto px-4">
-
+      <div className="section-content max-w-4xl mx-auto px-4 py-8">
         {/* Header */}
         <div className="bg-amber-500/10 p-2 px-4 rounded-full mb-4 inline-block">
           <span className="text-amber-400 text-sm font-medium">
