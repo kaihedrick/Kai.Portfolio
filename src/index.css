@@ -2,6 +2,73 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Modern transparent overlay scrollbars (Apple-like) */
+/* Firefox */
+html, body, .fp-overflow, .section-content, .styled-scrollbar {
+	scrollbar-width: thin;
+	/* thumb color | track color */
+	scrollbar-color: rgba(255,255,255,0.28) transparent;
+}
+/* On devices with precise pointers (mouse/trackpad), make the bar wider for easier clicking */
+@media (pointer: fine) {
+	html, body, .fp-overflow, .section-content, .styled-scrollbar { scrollbar-width: auto; }
+}
+
+/* WebKit (Chrome, Edge, Safari) */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+.fp-overflow::-webkit-scrollbar,
+.section-content::-webkit-scrollbar,
+.styled-scrollbar::-webkit-scrollbar {
+	width: 12px;
+	height: 12px;
+	background: transparent; /* no track background */
+}
+
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track,
+.fp-overflow::-webkit-scrollbar-track,
+.section-content::-webkit-scrollbar-track,
+.styled-scrollbar::-webkit-scrollbar-track {
+	background: transparent; /* fully transparent track */
+}
+
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb,
+.fp-overflow::-webkit-scrollbar-thumb,
+.section-content::-webkit-scrollbar-thumb,
+.styled-scrollbar::-webkit-scrollbar-thumb {
+	background: linear-gradient(180deg, rgba(255,255,255,0.35), rgba(255,255,255,0.20));
+	border-radius: 9999px;
+	border: 3px solid transparent; /* slightly larger click target while keeping airy look */
+	background-clip: content-box; /* keep the border transparent */
+}
+
+html::-webkit-scrollbar-thumb:hover,
+body::-webkit-scrollbar-thumb:hover,
+.fp-overflow::-webkit-scrollbar-thumb:hover,
+.section-content::-webkit-scrollbar-thumb:hover,
+.styled-scrollbar::-webkit-scrollbar-thumb:hover {
+	background: linear-gradient(180deg, rgba(255,255,255,0.55), rgba(255,255,255,0.32));
+}
+
+html::-webkit-scrollbar-corner,
+body::-webkit-scrollbar-corner,
+.fp-overflow::-webkit-scrollbar-corner,
+.section-content::-webkit-scrollbar-corner,
+.styled-scrollbar::-webkit-scrollbar-corner {
+	background: transparent;
+}
+
+/* Optional: make thumb appear only on hover for elements with this helper */
+.scrollbar-overlay::-webkit-scrollbar-thumb { background: transparent; }
+.scrollbar-overlay:hover::-webkit-scrollbar-thumb { background: linear-gradient(180deg, rgba(255,255,255,0.55), rgba(255,255,255,0.32)); }
+
+/* Navbar offset for DevHive intro (fallback) */
+.section[data-anchor="intro"] .section-content {
+  padding-top: 6rem !important;
+}
+
 /* Root styles */
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -1077,5 +1144,10 @@ html.fp-responsive .section[data-anchor="devhive"] {
   100% {
     transform: translateX(100%) rotate(45deg);
   }
+}
+
+/* Navbar offset for DevHive intro (fallback) */
+.section[data-anchor="intro"] .section-content {
+  padding-top: 6rem !important;
 }
 

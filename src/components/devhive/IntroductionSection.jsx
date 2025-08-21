@@ -10,8 +10,9 @@ export default function IntroductionSection({ fullpageApi }) {
     if (section) {
       const content = section.querySelector('.section-content');
       if (content) {
-        content.style.paddingTop = '2rem'; // Less padding at top
-        content.style.paddingBottom = '6rem'; // 6rem padding at bottom
+        // Extra top padding to clear the fixed navbar on the DevHive page
+        content.style.paddingTop = '6rem';
+        content.style.paddingBottom = '6rem'; // keep generous bottom padding
       }
     }
   }, []);

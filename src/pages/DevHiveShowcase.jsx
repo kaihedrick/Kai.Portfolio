@@ -88,14 +88,18 @@ export default function DevHiveShowcase() {
           "Showcase"
         ]}
         scrollingSpeed={700}
-        scrollOverflow
+        // Avoid inner overflow containers trapping scroll in production
+        scrollOverflow={false}
+        scrollOverflowReset={true}
         responsiveWidth={800}
         responsiveHeight={600}
         responsiveSlides
         bigSectionsDestination={'top'}
-        paddingTop={'0px'}
+        // Add space for the fixed navbar (approx 6rem height incl. offset)
+        paddingTop={'96px'}
         paddingBottom={'0px'}
-        normalScrollElements={'.scrollable-content'}
+        // Keep any custom scrollable areas unaffected (none needed now)
+        normalScrollElements={''}
         afterRender={({ fullpageApi }) => {
           console.log("fullpageApi initialized in DevHiveShowcase");
           setFullpageApi(fullpageApi);
@@ -103,7 +107,7 @@ export default function DevHiveShowcase() {
         render={({ state, fullpageApi }) => (
           <div id="fullpage">
             {/* Pass both fullpageApi and handleNavClick to IntroductionSection */}
-            <IntroductionSection fullpageApi={fullpageApi} handleNavClick={handleNavClick} />
+            <IntroductionSection fullpageApi={fullpageApi} />
             <RequirementsSection />
             <TechnologiesSection />
             <NewTechSection />
