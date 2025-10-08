@@ -10,6 +10,7 @@ import ProjectsSection from './components/portfolio/ProjectsSection';
 import DevHiveTeaser from './components/portfolio/DevHiveTeaser';
 import ContactSection from './components/portfolio/ContactSection';
 import DevHiveShowcase from './pages/DevHiveShowcase';
+import KaiblePrivacyPolicy from './pages/KaiblePrivacyPolicy';
 
 import './App.css';
 
@@ -135,6 +136,7 @@ function AppContent() {
       <Routes>
         <Route path="/" element={<Home setActiveIndex={setActiveIndex} />} />
         <Route path="/devhive-showcase" element={<DevHiveShowcase />} />
+        <Route path="/kaible/privacy-policy" element={<KaiblePrivacyPolicy />} />
       </Routes>
     </>
   );
