@@ -1,0 +1,111 @@
+:root {
+  --radius-xl: 1.25rem;
+  --ring: 0 0 0 2px rgba(239, 68, 68, 0.55); /* red-500/55 */
+  
+  /* App-level theme surfaces - Dark Apple aesthetic */
+  --bg-primary: #000000; /* Pure black */
+  --bg-secondary: #0a0a0a; /* Off-black */
+  --bg-tertiary: #1a1a1a; /* Lighter off-black */
+  --surface: rgba(26, 26, 26, 0.8); /* Dark glass surface */
+  --text: #ffffff; /* White text */
+  --text-secondary: #a1a1a1; /* Gray text */
+  --muted: #6b7280; /* gray-500 */
+  
+  /* Global accent - Red */
+  --accent: #ef4444; /* red-500 */
+  --accent-hover: #dc2626; /* red-600 */
+  --accent-ink: #fff;
+  --chip: rgba(239, 68, 68, 0.1);
+}
+
+/* DevHive brand (gold/amber) */
+.theme-devhive {
+  --accent: #f59e0b; /* amber-500 */
+  --accent-hover: #d97706; /* amber-600 */
+  --accent-ink: #000;
+  --chip: rgba(245, 158, 11, 0.1);
+}
+
+/* kAIble brand (red - same as global) */
+.theme-kaible {
+  --accent: #ef4444; /* red-500 */
+  --accent-hover: #dc2626; /* red-600 */
+  --accent-ink: #fff;
+  --chip: rgba(239, 68, 68, 0.1);
+}
+
+/* Theme utility classes */
+.btn-accent {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.chip {
+  background: var(--chip);
+  color: var(--accent);
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: #000000;
+}
+
+body {
+  background-color: #000000;
+  color: var(--text);
+  margin: 0;
+  padding: 0;
+}
+
+/* Ensure black extends everywhere including behind navbar */
+#root {
+  background-color: #000000;
+  min-height: 100vh;
+}
+
+.section {
+  padding: 4rem 0;
+}
+
+.section-min-h {
+  min-height: 85vh;
+  padding: 4rem 0;
+}
+
+/******** reduced motion ********/
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/******** focus visuals ********/
+:focus-visible {
+  outline: none;
+  box-shadow: var(--ring);
+  border-radius: 0.375rem;
+}
+
+a:focus-visible,
+button:focus-visible {
+  box-shadow: var(--ring);
+}
+
+/******** animations ********/
+@keyframes shine {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(200%);
+  }
+}
+
+.animate-shine {
+  animation: shine 1.5s forwards;
+}
+
