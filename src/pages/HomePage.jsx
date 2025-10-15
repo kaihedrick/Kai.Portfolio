@@ -40,7 +40,7 @@ export default function HomePage() {
           <span className="text-red-400 text-sm font-medium">Software Developer</span>
         </div>
 
-        <h1 className="text-5xl md:text-6xl font-bold mb-6 tracking-tight text-center">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight text-center">
           <Shuffle
             text="Kai Hedrick"
             shuffleDirection="right"
