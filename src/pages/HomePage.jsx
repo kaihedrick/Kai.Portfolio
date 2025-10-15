@@ -1,6 +1,6 @@
 import React from "react";
 import TextType from "../components/TextType";
-import FuzzyText from "../components/FuzzyText";
+import Shuffle from "../components/Shuffle";
 import LogoLoop from "../components/LogoLoop";
 import { 
   SiReact, 
@@ -40,17 +40,24 @@ export default function HomePage() {
           <span className="text-red-400 text-sm font-medium">Software Developer</span>
         </div>
 
-        <h1 className="text-5xl md:text-6xl font-bold mb-6 tracking-tight flex items-center justify-center">
-          <FuzzyText 
-            baseIntensity={0.2} 
-            hoverIntensity={0.5} 
-            enableHover={true}
-            fontSize="clamp(3rem, 8vw, 4rem)"
-            fontWeight={700}
-            color="#ffffff"
-          >
-            Kai Hedrick
-          </FuzzyText>
+        <h1 className="text-5xl md:text-6xl font-bold mb-6 tracking-tight text-center">
+          <Shuffle
+            text="Kai Hedrick"
+            shuffleDirection="right"
+            duration={0.35}
+            animationMode="evenodd"
+            shuffleTimes={1}
+            ease="power3.out"
+            stagger={0.03}
+            threshold={0.1}
+            triggerOnce={true}
+            triggerOnHover={true}
+            respectReducedMotion={true}
+            colorFrom="#ffffff"
+            colorTo="#ffffff"
+            className="text-white font-bold"
+            style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", system-ui, Avenir, Helvetica, Arial, sans-serif' }}
+          />
         </h1>
 
         <p className="text-xl text-gray-400 max-w-2xl mb-8 leading-relaxed mx-auto">
