@@ -5,11 +5,11 @@ export default function KaiblePage() {
   const [selectedMedia, setSelectedMedia] = useState(null);
 
   const screenshots = [
-    { src: "/images/kAIble/screenshot 1.png", alt: "App Screenshot 1", caption: "Main Reading Interface" },
-    { src: "/images/kAIble/screenshot 2.png", alt: "App Screenshot 2", caption: "Verse Commentary View" },
-    { src: "/images/kAIble/screenshot 3.png", alt: "App Screenshot 3", caption: "Reading Plans" },
-    { src: "/images/kAIble/screenshot 4.png", alt: "App Screenshot 4", caption: "Devotionals" },
-    { src: "/images/kAIble/screenshot 5.png", alt: "App Screenshot 5", caption: "Settings & Preferences" },
+    { src: "/images/kAIble/Bible_Reader_View.png", alt: "Bible Reader View", caption: "Bible Reader View" },
+    { src: "/images/kAIble/Book_Picker_View.png", alt: "Book Picker View", caption: "Book Picker View" },
+    { src: "/images/kAIble/Chapter_Picker_View.png", alt: "Chapter Picker View", caption: "Chapter Picker View" },
+    { src: "/images/kAIble/Commentary_Popup_View.png", alt: "Commentary Popup View", caption: "Commentary Popup View" },
+    { src: "/images/kAIble/Full_Commentary_Popup.png", alt: "Full Commentary Popup", caption: "Full Commentary Popup" },
   ];
 
   const openMedia = (media, type) => {
