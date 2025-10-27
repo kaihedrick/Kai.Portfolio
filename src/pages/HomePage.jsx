@@ -36,10 +36,6 @@ export default function HomePage() {
     <main className="min-h-screen px-4 md:px-6 lg:px-8 py-10 bg-black">
       {/* Hero Section */}
       <section className="max-w-6xl mx-auto mb-16 text-center py-12">
-        <div className="bg-red-500/10 p-2 px-4 rounded-full mb-4 inline-block border border-red-500/20">
-          <span className="text-red-400 text-sm font-medium">Software Developer</span>
-        </div>
-
         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight text-center">
           <Shuffle
             text="Kai Hedrick"
@@ -77,13 +73,13 @@ export default function HomePage() {
         <div className="flex flex-wrap gap-4 items-center justify-center">
           <a
             href="/work"
-            className="px-6 py-3 bg-red-500 hover:bg-red-600 text-white font-medium rounded-lg transition-colors focus-visible:ring-2 focus-visible:ring-red-500/60"
+            className="px-6 py-3 bg-red-500 hover:bg-red-600 text-white hover:text-white font-medium rounded-lg transition-colors focus-visible:ring-2 focus-visible:ring-red-500/60"
           >
             View Projects
           </a>
           <a
             href="/contact"
-            className="px-6 py-3 bg-white/5 hover:bg-white/10 text-white font-medium rounded-lg transition-colors border border-white/10 focus-visible:ring-2 focus-visible:ring-red-500/60"
+            className="px-6 py-3 bg-white/5 hover:bg-white/10 hover:text-white text-white font-medium rounded-lg transition-colors border border-white/10 focus-visible:ring-2 focus-visible:ring-red-500/60"
           >
             Contact Me
           </a>

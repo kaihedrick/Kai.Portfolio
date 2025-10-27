@@ -30,19 +30,18 @@ export default function MediaModal({ media, onClose }) {
         className="relative max-w-7xl max-h-[90vh] w-full"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Close button */}
-        <button
-          onClick={onClose}
-          className="absolute -top-12 right-0 text-white hover:text-red-400 transition-colors p-2 rounded-full hover:bg-white/10"
-          aria-label="Close"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
-
         {/* Media container with liquid glass effect */}
-        <div className="rounded-3xl border border-white/20 bg-black/40 backdrop-blur-2xl backdrop-saturate-150 shadow-2xl overflow-hidden">
+        <div className="rounded-3xl border border-white/20 bg-black/40 backdrop-blur-2xl backdrop-saturate-150 shadow-2xl overflow-hidden relative">
+          {/* Close button */}
+          <button
+            onClick={onClose}
+            className="absolute top-4 right-4 z-10 text-white hover:text-red-400 transition-colors p-2 rounded-full hover:bg-white/10 bg-black/50"
+            aria-label="Close"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
           {isVideo ? (
             <video
               src={media.src}

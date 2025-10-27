@@ -12,7 +12,7 @@ import {
 
 export default function DevHivePage() {
   const [selectedMedia, setSelectedMedia] = useState(null);
-  const [activeTab, setActiveTab] = useState('videos'); // 'videos' or 'images'
+  const [activeTab, setActiveTab] = useState('images'); // 'videos' or 'images'
 
   const images = [
     { src: "/images/DevHiveLaunch.png", alt: "DevHive Launch Screen", caption: "DevHive Launch Screen" },
@@ -51,7 +51,7 @@ export default function DevHivePage() {
           DevHive
         </h1>
         <p className="mt-2 text-gray-400 max-w-2xl leading-relaxed">
-          Senior project — agile workspace with tasks, sprints, and realtime chat.
+          Senior project agile workspace with tasks, sprints, and realtime chat.
         </p>
         <div className="mt-4 flex flex-wrap gap-3">
           <a 
@@ -84,7 +84,7 @@ export default function DevHivePage() {
           <div className="prose prose-stone max-w-none">
             <p className="text-gray-400 leading-relaxed mb-4">
               DevHive is a collaborative platform designed to connect developers and enable seamless project management. 
-              It provides tools for team collaboration and code sharing — all within a user-friendly interface that promotes developer productivity.
+              It provides tools for team collaboration and code sharing all within a user-friendly interface that promotes developer productivity.
             </p>
             <p className="text-gray-400 leading-relaxed mb-4">
               For my capstone project, I completed the entire SDLC, including Proposal, Requirements, Design, Planning, and Risk Management. 

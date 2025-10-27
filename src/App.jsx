@@ -8,6 +8,7 @@ import DevHivePage from "./pages/work/DevHivePage";
 import KaiblePage from "./pages/work/KaiblePage";
 import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
+import ResumePage from "./pages/ResumePage";
 import KaiblePrivacyPolicy from "./pages/KaiblePrivacyPolicy";
 import NotFound from "./pages/NotFound";
 
@@ -17,6 +18,7 @@ export default function App() {
       <FrostedNavbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/resume" element={<ResumePage />} />
         <Route path="/work" element={<WorkIndex />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
