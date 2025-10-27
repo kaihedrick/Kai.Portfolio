@@ -31,9 +31,6 @@ export default function ContactPage() {
     <main className="min-h-screen px-4 md:px-6 lg:px-8 py-10 bg-black">
       {/* Header */}
       <section className="max-w-6xl mx-auto mb-10">
-        <div className="bg-red-500/10 p-2 px-4 rounded-full mb-4 inline-block border border-red-500/20">
-          <span className="text-red-300 text-sm font-medium">Get in touch</span>
-        </div>
         <h1 className="text-4xl md:text-5xl font-bold mb-4 text-stone-100 tracking-tight">Contact Me</h1>
         <p className="text-lg text-stone-300 leading-relaxed max-w-2xl">
           I'm open to new projects, collaboration, internships, and roles. Reach out and I'll get back to you soon.
